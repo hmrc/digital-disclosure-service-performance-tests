@@ -21,6 +21,7 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 trait DDSConfiguration extends ServicesConfiguration {
 
   val baseUrlAddressLookupFrontend: String = baseUrlFor("address-lookup-frontend")
+  val alfeUrlLookup                        = "/lookup-address"
   val alfeUrl: String                      = baseUrlAddressLookupFrontend + "/lookup-address"
   val postcode: String                     = readProperty("services.address-lookup-frontend.postcode")
   val baseUrl: String                      = baseUrlFor("digital-disclosure")

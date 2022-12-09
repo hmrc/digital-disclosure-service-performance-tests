@@ -81,17 +81,17 @@ class DDSSimulation extends PerformanceTestRunner {
 
   setup("post-nino-page", "POST NINO Page") withRequests postNinoPage
 
-  setup("get-registered-for-vat-page", "GET Registered For VAT Page") withRequests getRegForVATPage
+  setup("get-registered-for-vat-page", "GET Registered For VAT Page") withRequests getIsRegForVATPage
 
-  setup("post-registered-for-vat-page", "POST Registered For VAT Page") withRequests postRegForVATPage
+  setup("post-registered-for-vat-page", "POST Registered For VAT Page") withRequests postIsRegForVATPage
 
   setup("get-vat-registration-number-page", "GET VAT Registration Number Page") withRequests getVATRegNumberPage
 
   setup("post-vat-registration-number-page", "POST VAT Registration Number Page") withRequests postVATRegNumberPage
 
-  setup("get-registered-for-self-assessment-page", "GET Registered For Self Assessment Page") withRequests getRegForSAPage
+  setup("get-registered-for-self-assessment-page", "GET Registered For Self Assessment Page") withRequests getIsRegForSAPage
 
-  setup("post-registered-for-self-assessment-page", "POST Registered For Self Assessment Page") withRequests postRegForSAPage
+  setup("post-registered-for-self-assessment-page", "POST Registered For Self Assessment Page") withRequests postIsRegForSAPage
 
   setup("get-self-assessment-utr-page", "GET Self Assessment UTR Page") withRequests getUTRPage
 
@@ -111,10 +111,13 @@ class DDSSimulation extends PerformanceTestRunner {
 
   setup("post-alfe-confirm-page", "POST ALFE Confirm Page") withRequests postALFEConfirmPage
 
-  setup("get-what-is-your-name-page", "GET What Is Your Full Name Page") withRequests getWhatIsYourNamePage
+  setup("get-your-full-name-page", "GET Your Full Name Page") withRequests getYourFullNamePage
 
+  setup("post-your-full-name-page", "POST Your Full Name Page") withRequests postYourFullNamePage
 
+//  setup("get-tel-number-page", "GET Your Telephone Number Page") withRequests getYourTelNumberPage
 
+//  setup("post-tel-number-page", "POST Your Telephone Number Page") withRequests postYourTelNumberPage
 
 
 

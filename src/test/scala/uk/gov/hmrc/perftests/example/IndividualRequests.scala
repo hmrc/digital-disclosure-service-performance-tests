@@ -237,13 +237,13 @@ object IndividualRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(header("Location").is(s"$DDSHome/notification/individual-registered-for-vat").saveAs("regForVat"))
 
-  val getRegForVATPage: HttpRequestBuilder =
+  val getIsRegForVATPage: HttpRequestBuilder =
     http("Get Registered For VAT Page")
       .get(baseUrl + s"$${regForVat}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
-  val postRegForVATPage: HttpRequestBuilder =
+  val postIsRegForVATPage: HttpRequestBuilder =
     http("POST Registered For VAT Page")
       .post(baseUrl + s"$${regForVat}": String)
       .formParam("""value""", """yesIKnow""")
@@ -265,13 +265,13 @@ object IndividualRequests extends ServicesConfiguration {
       .check(status.is(303))
       .check(header("Location").is(s"$DDSHome/notification/individual-self-assessment").saveAs("regForSA"))
 
-  val getRegForSAPage: HttpRequestBuilder =
+  val getIsRegForSAPage: HttpRequestBuilder =
     http("Get Registered For SA Page")
       .get(baseUrl + s"$${regForSA}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
-  val postRegForSAPage: HttpRequestBuilder =
+  val postIsRegForSAPage: HttpRequestBuilder =
     http("Get Registered For SA Page")
       .post(baseUrl + s"$${regForSA}": String)
       .formParam("""value""", """yesIKnow""")
@@ -302,58 +302,77 @@ object IndividualRequests extends ServicesConfiguration {
 
   val getALFEBeginPage: HttpRequestBuilder =
     http("Get Address Lookup FrontEnd Begin Page")
-      .get(s"$${alfebegin}": String)
+      .get(s"$${alfeBegin}": String)
       .check(status.is(303))
-      .check(header("Location").is(alfeUrl + s"/$${addressLookupId}"+"/country-lookup").saveAs("alfeCountryLookup"))
+      .check(header("Location").is(alfeUrlLookup + s"/$${addressLookupId}"+"/country-picker").saveAs("alfeCountryLookup"))
 
   val getALFECountryPickerPage: HttpRequestBuilder =
     http("Get Address Lookup FrontEnd Country Picker Page")
-      .get(s"$${alfeCountryLookup}": String)
+      .get(baseUrlAddressLookupFrontend + s"$${alfeCountryLookup}": String)
       .check(status.is(200))
 
   val postALFECountryPickerPage: HttpRequestBuilder =
     http("Post ALFE Country Picker Page")
-      .post(s"$${alfeCountryLookup}": String)
+      .post(baseUrlAddressLookupFrontend + s"$${alfeCountryLookup}": String)
       .formParam("""countryCode""", """France""")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
-      .check(header("Location").is(alfeUrl + s"$${addressLookupId}"+"/international/edit").saveAs("alfeAddressEdit"))
+      .check(header("Location").is(alfeUrlLookup + s"/$${addressLookupId}"+"/international/edit").saveAs("alfeAddressEdit"))
 
   val getALFEAddressEditPage: HttpRequestBuilder =
     http("Get ALFE Address Edit Page")
-      .get(s"$${alfeAddressEdit}": String)
+      .get(baseUrlAddressLookupFrontend + s"$${alfeAddressEdit}": String)
       .check(status.is(200))
 
   val postALFEAddressEditPage: HttpRequestBuilder =
     http("Post ALFE Address Edit Page")
-      .post(s"$${alfeAddressEdit}": String)
+      .post(baseUrlAddressLookupFrontend + s"$${alfeAddressEdit}": String)
       .formParam("""line1""", """Address Line 1""")
       .formParam("""line2""", """Address Line 2""")
       .formParam("""town""", """Test Town""")
+      .formParam("""countryCode""", """FR""")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
-      .check(header("Location").is(alfeUrl + s"$${addressLookupId}"+"/international/confirm").saveAs("alfeConfirm"))
+      .check(header("Location").is(alfeUrlLookup + s"/$${addressLookupId}"+"/international/confirm").saveAs("alfeConfirm"))
 
   val getALFEConfirmPage: HttpRequestBuilder =
     http("Get ALFE Confirm Page")
-      .get(s"$${alfeConfirm}": String)
+      .get(baseUrlAddressLookupFrontend + s"$${alfeConfirm}": String)
       .check(status.is(200))
 
   val postALFEConfirmPage: HttpRequestBuilder =
     http("Post ALFE Confirm Page")
-      .post(s"$${alfeConfirm}": String)
+      .post(baseUrlAddressLookupFrontend + s"$${alfeConfirm}": String)
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
-      .check(header("Location").is(s"$DDSHome/notification/individual-address/retrieve?id=$${addressLookupId}").saveAs("ddsRetrieveAddress"))
+      .check(header("Location").is(s"$DDSUrl/notification/individual-address/retrieve?id=$${addressLookupId}").saveAs("ddsRetrieveAddress"))
 
-  val getWhatIsYourNamePage: HttpRequestBuilder =
-    http("Get What Is Your Name Page")
+  val getYourFullNamePage: HttpRequestBuilder =
+    http("Get Your Full Name Page")
       .get(DDSUrl + "/notification/your-full-name": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
+  val postYourFullNamePage: HttpRequestBuilder =
+    http("Post Your Full Name Page")
+      .post(DDSUrl + "/notification/your-full-name": String)
+      .formParam("""value""", """Test Name""")
+      .formParam("csrfToken", s"$${csrfToken}")
+      .check(status.is(303))
+      .check(header("Location").is(s"$DDSHome/notification/your-telephone-number").saveAs("telNumber"))
 
+  val getYourTelNumberPage: HttpRequestBuilder =
+    http("Get Telephone Number Page")
+      .get(baseUrl + s"$${telNumber}": String)
+      .check(status.is(200))
+      .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
-
+  val postYourTelNumberPage: HttpRequestBuilder =
+    http("Post Telephone Number Page")
+      .post(baseUrl + s"$${telNumber}": String)
+      .formParam("""value""", """0123456789""")
+      .formParam("csrfToken", s"$${csrfToken}")
+      .check(status.is(303))
+      .check(header("Location").is(s"$DDSHome/notification/your-telephone-number").saveAs("haveEmail"))
 
 }
