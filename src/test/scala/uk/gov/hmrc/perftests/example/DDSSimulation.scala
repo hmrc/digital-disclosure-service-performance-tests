@@ -21,6 +21,7 @@ import uk.gov.hmrc.perftests.example.AuthLoginRequests._
 import uk.gov.hmrc.perftests.example.CompanyRequests._
 import uk.gov.hmrc.perftests.example.EstateRequests._
 import uk.gov.hmrc.perftests.example.IndividualRequests._
+import uk.gov.hmrc.perftests.example.LimitedLiabilityPartnershipRequests._
 
 class DDSSimulation extends PerformanceTestRunner {
 
@@ -170,6 +171,43 @@ class DDSSimulation extends PerformanceTestRunner {
     postCompanyALFEConfirmPage,
     getCompanyYourFullNamePage,
     postCompanyYourFullNamePage
+  )
+
+  setup(
+    "DigitalDisclosureLimitedLiabilityPartnershipJourney",
+    "A full limited liability partnership journey through the Digital Disclosure service"
+  ) withRequests(
+    getLoginPage,
+    postLoginPage,
+    getLLPHomePage,
+    getLLPLetterFromHMRCPage,
+    postLLPLetterFromHMRCPage,
+    getLLPHmrcLetterReferencePage,
+    postLLPHmrcLetterReferencePage,
+    getLLPWhatIsDisclosureAboutPage,
+    postLLPWhatIsDisclosureAboutPage,
+    getLLPAreYouDesignatedMemberPage,
+    postLLPAreYouDesignatedMemberPage,
+    getLLPAreYouRepresentingAnOrgPage,
+    postLLPAreYouRepresentingAnOrgPage,
+    getLLPOrgNamePage,
+    postLLPOrgNamePage,
+    getLLPOffshoreLiabilitiesPage,
+    postLLPOffshoreLiabilitiesPage,
+    getLLPOnshoreLiabilitiesPage,
+    postLLPOnshoreLiabilitiesPage,
+    getLLPNamePage,
+    postLLPNamePage,
+    getLLPAddressLookupPage,
+    getLLPALFEBeginPage,
+    getLLPALFECountryPickerPage,
+    postLLPALFECountryPickerPage,
+    getLLPALFEAddressEditPage,
+    postLLPALFEAddressEditPage,
+    getLLPALFEConfirmPage,
+    postLLPALFEConfirmPage,
+    getLLPYourFullNamePage,
+    postLLPYourFullNamePage
   )
 
   runSimulation()
