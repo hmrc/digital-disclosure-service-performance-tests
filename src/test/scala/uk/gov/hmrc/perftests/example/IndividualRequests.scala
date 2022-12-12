@@ -83,7 +83,7 @@ object IndividualRequests extends ServicesConfiguration {
 
   val getWhatIsDisclosureAboutPage: HttpRequestBuilder =
     http("Get What Is This Disclosure About Page")
-      .get(baseUrl + s"$${letterReference}": String)
+      .get(baseUrl + s"$${whatIsThisDisclosureAbout}": String)
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 

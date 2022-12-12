@@ -18,6 +18,7 @@ package uk.gov.hmrc.perftests.example
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.example.AuthLoginRequests.{getLoginPage, postLoginPage}
+import uk.gov.hmrc.perftests.example.EstateRequests._
 import uk.gov.hmrc.perftests.example.ExampleRequests._
 import uk.gov.hmrc.perftests.example.IndividualRequests._
 
@@ -76,6 +77,64 @@ class DDSSimulation extends PerformanceTestRunner {
 //      getYourTelNumberPage,
 //      postYourTelNumberPage
   )
+
+  setup(
+    "DigitalDisclosureEstateJourney",
+    "A full estate journey through the Digital Disclosure service"
+  ) withRequests(
+    getLoginPage,
+    postLoginPage,
+    getEstateHomePage,
+    getEstateLetterFromHMRCPage,
+    postEstateLetterFromHMRCPage,
+    getEstateHmrcLetterReferencePage,
+    postEstateHmrcLetterReferencePage,
+    getEstateWhatIsDisclosureAboutPage,
+    postEstateWhatIsDisclosureAboutPage,
+    getEstateAreYouTheExecutorPage,
+    postEstateAreYouTheExecutorPage,
+    getEstateAreYouRepresentingAnOrgPage,
+    postEstateAreYouRepresentingAnOrgPage,
+    getEstateOrgNamePage,
+    postEstateOrgNamePage,
+    getEstateOffshoreLiabilitiesPage,
+    postEstateOffshoreLiabilitiesPage,
+    getEstateOnshoreLiabilitiesPage,
+    postEstateOnshoreLiabilitiesPage,
+    getEstateIndividualFullNamePage,
+    postEstateIndividualFullNamePage,
+    getEstateDateOfBirthPage,
+    postEstateDateOfBirthPage,
+    getEstateOccupationPage,
+    postEstateOccupationPage,
+    getEstateHaveNinoPage,
+    postEstateHaveNinoPage,
+    getEstateNinoPage,
+    postEstateNinoPage,
+    getEstateIsRegForVATPage,
+    postEstateIsRegForVATPage,
+    getEstateVATRegNumberPage,
+    postEstateVATRegNumberPage,
+    getEstateIsRegForSAPage,
+    postEstateIsRegForSAPage,
+    getEstateUTRPage,
+    postEstateUTRPage,
+    getEstateAddressLookupPage,
+    getEstateALFEBeginPage,
+    getEstateALFECountryPickerPage,
+    postEstateALFECountryPickerPage,
+    getEstateALFEAddressEditPage,
+    postEstateALFEAddressEditPage,
+    getEstateALFEConfirmPage,
+    postEstateALFEConfirmPage,
+    getEstateYourFullNamePage,
+    postEstateYourFullNamePage
+//    getEstateYourTelNumberPage,
+//    postEstateYourTelNumberPage
+
+
+
+    )
 
   runSimulation()
 }
