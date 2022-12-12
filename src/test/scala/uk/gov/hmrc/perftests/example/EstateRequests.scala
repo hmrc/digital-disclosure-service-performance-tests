@@ -87,7 +87,7 @@ object EstateRequests extends ServicesConfiguration {
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postEstateAreYouTheExecutorPage: HttpRequestBuilder =
-    http("POST Are You The Individual Page")
+    http("POST Are You The Executor Page")
       .post(baseUrl + s"$${areYouTheExecutor}": String)
       .formParam("""value""", """false""")
       .formParam("csrfToken", s"$${csrfToken}")

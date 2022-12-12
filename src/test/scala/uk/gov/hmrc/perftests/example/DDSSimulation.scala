@@ -17,9 +17,9 @@
 package uk.gov.hmrc.perftests.example
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.example.AuthLoginRequests.{getLoginPage, postLoginPage}
+import uk.gov.hmrc.perftests.example.AuthLoginRequests._
+import uk.gov.hmrc.perftests.example.CompanyRequests._
 import uk.gov.hmrc.perftests.example.EstateRequests._
-import uk.gov.hmrc.perftests.example.ExampleRequests._
 import uk.gov.hmrc.perftests.example.IndividualRequests._
 
 class DDSSimulation extends PerformanceTestRunner {
@@ -131,10 +131,46 @@ class DDSSimulation extends PerformanceTestRunner {
     postEstateYourFullNamePage
 //    getEstateYourTelNumberPage,
 //    postEstateYourTelNumberPage
-
-
-
     )
+
+  setup(
+    "DigitalDisclosureCompanyJourney",
+    "A full company journey through the Digital Disclosure service"
+  ) withRequests(
+    getLoginPage,
+    postLoginPage,
+    getCompanyHomePage,
+    getCompanyLetterFromHMRCPage,
+    postCompanyLetterFromHMRCPage,
+    getCompanyHmrcLetterReferencePage,
+    postCompanyHmrcLetterReferencePage,
+    getCompanyWhatIsDisclosureAboutPage,
+    postCompanyWhatIsDisclosureAboutPage,
+    getCompanyAreYouTheOfficerPage,
+    postCompanyAreYouTheOfficerPage,
+    getCompanyAreYouRepresentingAnOrgPage,
+    postCompanyAreYouRepresentingAnOrgPage,
+    getCompanyOrgNamePage,
+    postCompanyOrgNamePage,
+    getCompanyOffshoreLiabilitiesPage,
+    postCompanyOffshoreLiabilitiesPage,
+    getCompanyOnshoreLiabilitiesPage,
+    postCompanyOnshoreLiabilitiesPage,
+    getCompanyNamePage,
+    postCompanyNamePage,
+    getCompanyRegistrationNumberPage,
+    postCompanyRegistrationNumberPage,
+    getCompanyAddressLookupPage,
+    getCompanyALFEBeginPage,
+    getCompanyALFECountryPickerPage,
+    postCompanyALFECountryPickerPage,
+    getCompanyALFEAddressEditPage,
+    postCompanyALFEAddressEditPage,
+    getCompanyALFEConfirmPage,
+    postCompanyALFEConfirmPage,
+    getCompanyYourFullNamePage,
+    postCompanyYourFullNamePage
+  )
 
   runSimulation()
 }
