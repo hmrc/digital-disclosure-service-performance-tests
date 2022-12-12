@@ -25,7 +25,7 @@ trait DDSConfiguration extends ServicesConfiguration {
   val alfeUrl: String                      = baseUrlAddressLookupFrontend + "/lookup-address"
   val postcode: String                     = readProperty("services.address-lookup-frontend.postcode")
   val baseUrl: String                      = baseUrlFor("digital-disclosure")
-  val DDSUrl: String                       = baseUrl + "/digital-disclosure"
   val DDSHome: String                      = "/digital-disclosure"
+  val DDSUrl: String                       = baseUrl + DDSHome
   val loginUrl: String                     = baseUrlFor("auth-login-stub")
 }
