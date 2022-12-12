@@ -22,6 +22,7 @@ import uk.gov.hmrc.perftests.example.CompanyRequests._
 import uk.gov.hmrc.perftests.example.EstateRequests._
 import uk.gov.hmrc.perftests.example.IndividualRequests._
 import uk.gov.hmrc.perftests.example.LimitedLiabilityPartnershipRequests._
+import uk.gov.hmrc.perftests.example.TrustRequests._
 
 class DDSSimulation extends PerformanceTestRunner {
 
@@ -208,6 +209,44 @@ class DDSSimulation extends PerformanceTestRunner {
     postLLPALFEConfirmPage,
     getLLPYourFullNamePage,
     postLLPYourFullNamePage
+  )
+
+  setup(
+    "DigitalDisclosureTrustJourney",
+    "A full trust journey through the Digital Disclosure service"
+  ) withRequests(
+    getLoginPage,
+    postLoginPage,
+    getTrustHomePage,
+    getTrustLetterFromHMRCPage,
+    postTrustLetterFromHMRCPage,
+    getTrustHmrcLetterReferencePage,
+    postTrustHmrcLetterReferencePage,
+    getTrustWhatIsDisclosureAboutPage,
+    postTrustWhatIsDisclosureAboutPage,
+    getTrustAreYouTrusteePage,
+    postTrustAreYouTrusteePage,
+    getTrustAreYouRepresentingAnOrgPage,
+    postTrustAreYouRepresentingAnOrgPage,
+    getTrustOrgNamePage,
+    postTrustOrgNamePage,
+    getTrustOffshoreLiabilitiesPage,
+    postTrustOffshoreLiabilitiesPage,
+    getTrustOnshoreLiabilitiesPage,
+    postTrustOnshoreLiabilitiesPage,
+    getTrustNamePage,
+    postTrustNamePage,
+    getTrustAddressLookupPage,
+    getTrustALFEBeginPage,
+    getTrustALFECountryPickerPage,
+    postTrustALFECountryPickerPage,
+    getTrustALFEAddressEditPage,
+    postTrustALFEAddressEditPage,
+    getTrustALFEConfirmPage,
+    postTrustALFEConfirmPage,
+    getTrustYourFullNamePage,
+    postTrustYourFullNamePage
+
   )
 
   runSimulation()
