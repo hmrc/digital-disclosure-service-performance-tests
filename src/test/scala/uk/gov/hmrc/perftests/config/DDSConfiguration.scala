@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.example.config
+package uk.gov.hmrc.perftests.config
 
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
