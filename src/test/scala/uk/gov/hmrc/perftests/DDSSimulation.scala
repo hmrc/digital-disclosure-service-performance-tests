@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.example
+package uk.gov.hmrc.perftests
 
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.example.AddressLookupRequests._
-import uk.gov.hmrc.perftests.example.AuthLoginRequests._
-import uk.gov.hmrc.perftests.example.CommonRequests._
-import uk.gov.hmrc.perftests.example.CompanyRequests._
-import uk.gov.hmrc.perftests.example.EstateRequests._
-import uk.gov.hmrc.perftests.example.IndividualRequests._
-import uk.gov.hmrc.perftests.example.LimitedLiabilityPartnershipRequests._
-import uk.gov.hmrc.perftests.example.TrustRequests._
-import uk.gov.hmrc.perftests.example.YourInfoRequests._
+import AddressLookupRequests._
+import AuthLoginRequests._
+import CommonRequests._
+import CompanyRequests._
+import EstateRequests._
+import IndividualRequests._
+import LimitedLiabilityPartnershipRequests._
+import TrustRequests._
+import YourInfoRequests._
 
 class DDSSimulation extends PerformanceTestRunner {
 
@@ -95,9 +95,9 @@ class DDSSimulation extends PerformanceTestRunner {
     postALFEYourAddressEditPage,
     getALFEYourAddressConfirmPage,
     postALFEYourAddressConfirmPage,
-    getCYAPage
-//    post-check-your-answers-page TODO
-//    get-TODO-page
+    getCYAPage,
+    postCYAPage,
+    getSubmissionConfirmationPage
   )
 
   setup(
@@ -165,9 +165,9 @@ class DDSSimulation extends PerformanceTestRunner {
     postALFEYourAddressEditPage,
     getALFEYourAddressConfirmPage,
     postALFEYourAddressConfirmPage,
-    getCYAPage
-//    post-check-your-answers-page TODO
-//    get-TODO-page
+    getCYAPage,
+    postCYAPage,
+    getSubmissionConfirmationPage
     )
 
   setup(
@@ -221,9 +221,9 @@ class DDSSimulation extends PerformanceTestRunner {
     postALFEYourAddressEditPage,
     getALFEYourAddressConfirmPage,
     postALFEYourAddressConfirmPage,
-    getCYAPage
-//    post-check-your-answers-page TODO
-//    get-TODO-page
+    getCYAPage,
+    postCYAPage,
+    getSubmissionConfirmationPage
   )
 
   setup(
@@ -275,9 +275,9 @@ class DDSSimulation extends PerformanceTestRunner {
     postALFEYourAddressEditPage,
     getALFEYourAddressConfirmPage,
     postALFEYourAddressConfirmPage,
-    getCYAPage
-//    post-check-your-answers-page TODO
-//    get-TODO-page
+    getCYAPage,
+    postCYAPage,
+    getSubmissionConfirmationPage
   )
 
   setup(
@@ -329,9 +329,9 @@ class DDSSimulation extends PerformanceTestRunner {
     postALFEYourAddressEditPage,
     getALFEYourAddressConfirmPage,
     postALFEYourAddressConfirmPage,
-    getCYAPage
-//    post-check-your-answers-page TODO
-//    get-TODO-page
+    getCYAPage,
+    postCYAPage,
+    getSubmissionConfirmationPage
   )
 
   runSimulation()

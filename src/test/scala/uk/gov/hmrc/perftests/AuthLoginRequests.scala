@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.example
+package uk.gov.hmrc.perftests
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import io.netty.handler.codec.http.HttpResponseStatus
-import uk.gov.hmrc.perftests.example.config.DDSConfiguration
+import uk.gov.hmrc.perftests.config.DDSConfiguration
 
 import scala.util.Random
 
