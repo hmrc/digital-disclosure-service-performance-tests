@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,13 +23,26 @@ import uk.gov.hmrc.perftests.dds.Configuration
 
 object DigitalDisclosureRequests extends Configuration {
 
-  val digitalDisclosureRoute = s"$digitalDisclosureUrl/digital-disclosure"
+  val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
   val notificationRoute      = s"$digitalDisclosureRoute/notification"
 
   val navigateToStart: HttpRequestBuilder =
-    http("Navigate to /digital-disclosure")
+    http("Navigate to /tell-hmrc-about-underpaid-tax-from-previous-years")
       .get(s"$digitalDisclosureRoute")
       .check(status.is(200))
+
+  val navigateToUsingThisService: HttpRequestBuilder =
+    http("Navigate to /using-this-service")
+      .get(s"$digitalDisclosureRoute/using-this-service")
+      .check(status.is(200))
+      .check(saveCsrfToken)    
+
+  def submitUsingThisService(value: String): HttpRequestBuilder =
+    http(s"Submit '$value'")
+      .post(s"$digitalDisclosureRoute/using-this-service")
+      .formParam("value", value)
+      .formParam("csrfToken", "${csrfToken}")
+      .check(status.is(303))     
 
   val navigateToLetterFromHmrc: HttpRequestBuilder =
     http("Navigate to /letter-from-hmrc")
@@ -159,16 +172,17 @@ object DigitalDisclosureRequests extends Configuration {
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
 
-  val navigateToContactByEmail: HttpRequestBuilder =
-    http("Navigate to /contact-by-email")
-      .get(s"$notificationRoute/contact-by-email")
+  val navigateToContactPreferences: HttpRequestBuilder =
+    http("Navigate to /contact-preference")
+      .get(s"$notificationRoute/contact-preference")
       .check(status.is(200))
       .check(saveCsrfToken)
 
-  def submitContactByEmail(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/contact-by-email")
-      .formParam("value", value)
+  def submitContactPreferences: HttpRequestBuilder =
+    http(s"Submit contact preferences")
+      .post(s"$notificationRoute/contact-preference")
+      .formParam("value[0]", "email")
+      .formParam("value[1]", "telephone")
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
 
