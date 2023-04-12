@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import uk.gov.hmrc.perftests.dds.Configuration
 object AuthLoginStubRequests extends Configuration {
 
   val signInRoute: String    = s"$authLoginStubUrl/auth-login-stub/gg-sign-in"
-  val digitalDisclosureRoute = s"$digitalDisclosureUrl/digital-disclosure"
+  val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
 
   val navigateToSignIn: HttpRequestBuilder =
     http("Navigate to /auth-login-stub/gg-sign-in")

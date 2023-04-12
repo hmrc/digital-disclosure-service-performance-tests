@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,14 @@ class Simulation extends PerformanceTestRunner {
     navigateToSignIn,
     signIn("AA000000B"),
     navigateToStart
+  )
+
+  setup(
+    "using-this-service",
+    "Begin a notification"
+  ).withRequests(
+    navigateToUsingThisService,
+    submitUsingThisService("notification")
   )
 
   setup(
@@ -66,12 +74,12 @@ class Simulation extends PerformanceTestRunner {
   ).withRequests(
     navigateToYourFullName,
     submitYourFullName("Test Full Name"),
-    navigateToYourTelephoneNumber,
-    submitYourTelephoneNumber("07123456789"),
-    navigateToContactByEmail,
-    submitContactByEmail("true"),
+    navigateToContactPreferences,
+    submitContactPreferences,
     navigateToYourEmailAddress,
     submitYourEmailAddress("dds@example.com"),
+    navigateToYourTelephoneNumber,
+    submitYourTelephoneNumber("07123456789"),
     navigateToYourAddressLookup
   )
 
