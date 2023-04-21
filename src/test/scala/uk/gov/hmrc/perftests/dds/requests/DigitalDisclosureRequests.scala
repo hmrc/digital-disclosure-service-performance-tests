@@ -25,6 +25,7 @@ object DigitalDisclosureRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
   val notificationRoute      = s"$digitalDisclosureRoute/notification"
+  val onshoreRoute      = s"$digitalDisclosureRoute/onshore"
 
   val navigateToStart: HttpRequestBuilder =
     http("Navigate to /tell-hmrc-about-underpaid-tax-from-previous-years")
@@ -105,6 +106,13 @@ object DigitalDisclosureRequests extends Configuration {
   def submitDiscloseOffshoreLiabilities(value: String): HttpRequestBuilder =
     http(s"Submit '$value'")
       .post(s"$notificationRoute/disclose-offshore-liabilities")
+      .formParam("value", value)
+      .formParam("csrfToken", "${csrfToken}")
+      .check(status.is(303))
+
+  def submitDiscloseOnshoreLiabilities(value: String): HttpRequestBuilder =
+    http(s"Submit '$value'")
+      .post(s"$notificationRoute/disclose-onshore-liabilities")
       .formParam("value", value)
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
@@ -222,5 +230,35 @@ object DigitalDisclosureRequests extends Configuration {
       .get(s"$notificationRoute/submitted/$reference")
       .check(status.is(200))
       .check(referenceIsDisplayed(reference))
+
+  val navigateToMakeADisclosure: HttpRequestBuilder =
+    http("Navigate to /make-a-disclosure")
+      .get(s"$digitalDisclosureRoute/make-a-disclosure")
+      .check(status.is(200))
+
+  val submitMakeADisclosure: HttpRequestBuilder =
+    http(s"make-a-disclosure")
+      .post(s"$digitalDisclosureRoute/make-a-disclosure")
+      .formParam("csrfToken", "${csrfToken}")
+      .check(status.is(303))
+
+  val navigateToTaskList: HttpRequestBuilder =
+    http("Navigate to /disclosure-list-of-tasks")
+      .get(s"$digitalDisclosureRoute/disclosure-list-of-tasks")
+      .check(status.is(200))
+
+  val navigateToDeclaration: HttpRequestBuilder =
+    http("Navigate to /declaration")
+      .get(s"$digitalDisclosureRoute/declaration")
+      .check(status.is(200))
+
+
+  val submitDeclarationConfirmation: HttpRequestBuilder =
+    http(s"confirm")
+      .get(s"$digitalDisclosureRoute/declaration/confirm")
+      .formParam("csrfToken", "${csrfToken}")
+      .check(status.is(303))
+
+
 
 }

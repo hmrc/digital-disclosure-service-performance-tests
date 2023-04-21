@@ -20,6 +20,10 @@ import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.dds.requests.AddressLookupRequests._
 import uk.gov.hmrc.perftests.dds.requests.AuthLoginStubRequests._
 import uk.gov.hmrc.perftests.dds.requests.DigitalDisclosureRequests._
+import uk.gov.hmrc.perftests.dds.requests.OnshoreDisclosureRequests._
+import uk.gov.hmrc.perftests.dds.requests.OffshoreDisclosureRequests._
+import uk.gov.hmrc.perftests.dds.requests.OtherLiabilityRequests._
+import uk.gov.hmrc.perftests.dds.requests.ReasonRequests._
 
 class Simulation extends PerformanceTestRunner {
 
@@ -59,8 +63,8 @@ class Simulation extends PerformanceTestRunner {
     navigateToAreYouAnOfficer,
     submitAreYouAnOfficer("true"),
     navigateToDiscloseOffshoreLiabilities,
-    submitDiscloseOffshoreLiabilities("false"),
-    navigateToDiscloseOnshoreLiabilitiesOnly,
+    submitDiscloseOffshoreLiabilities("true"),
+    submitDiscloseOnshoreLiabilities("true"),
     navigateToCompanyName,
     submitCompanyName("Test Company Name"),
     navigateToCompanyRegistration,
@@ -102,8 +106,137 @@ class Simulation extends PerformanceTestRunner {
   ).withRequests(
     navigateToCheckYourAnswers,
     submitCheckYourAnswers,
-    navigateToSubmitted("CFSS-1234567")
+    navigateToSubmitted("CFSS-1234567") ,
   )
+
+  setup(
+    "make-a-disclosure",
+    "make-a-disclosure"
+  ).withRequests(
+    navigateToStart,
+    navigateToMakeADisclosure,
+    submitMakeADisclosure,
+    navigateToTaskList
+  )
+
+  setup(
+    "declaration",
+    "Make a Declaration"
+  ).withRequests(
+    navigateToDeclaration,
+    submitDeclarationConfirmation,
+    navigateToTaskList
+  )
+
+  setup(
+    "onshore-disclosure",
+    "Submit Onshore disclosure"
+  ).withRequests(
+    navigateToReasonForDisclosure,
+    submitReasonForDisclosurePreferences,
+    navigateToCDF ,
+    submitCDFPreferences("true") ,
+    navigateToWhatDoYouNeedToDisclose,
+    submitDisclosurePreferences,
+  )
+
+  setup(
+    "accounting-Period",
+    "Provide CT and DL Accounting Period"
+  ).withRequests(
+    navigateToCorporationTaxLiabilities,
+    submitCorporationTaxLiabilities,
+    navigateToCorporationTaxSummary,
+    navigateToCorporationTaxAccountingPeriods,
+    submitCTAccountingPeriodsPreferences("false"),
+    navigateToDirectorLoanLiabilities,
+    submitDirectorLoanLiabilities,
+    navigateToDirectorLoanLiabilitiesSummary,
+    navigateToDLAccountingPeriods,
+    submitDLAccountingPeriodsPreferences("false")
+  )
+
+  setup(
+    "onshore-years",
+    "Select Onshore Tax Year"
+  ).withRequests(
+    navigateToOnshoreYears,
+    submitOnshoreYearsSelection,
+    navigateToOnshoreLiabilities,
+    submitOnshoreLiabilities,
+    navigateToOnshoreLiabilitiesSummary,
+    navigateToTaskList
+  )
+
+  setup(
+    "offshore-disclosure",
+    "Submit Offshore disclosure"
+  ).withRequests(
+    navigateToReasonForDisclosureOffshore,
+    submitReasonForDisclosurePreferencesOffshore,
+    navigateToCDFOffshore,
+    submitCDFPreferencesOffshore("true"),
+  )
+
+  setup(
+    "offshore-years",
+    "Select Offshore Tax Year"
+  ).withRequests(
+    navigateToOffshoreYears,
+    submitOffshoreYearsSelection,
+    navigateToOffshoreLiabilitiesCountry,
+    submitOffshoreLiabilitiesCountryPreferences("BDI"),
+    navigateToCountriesOrTerritories,
+    submitCountriesOrTerritoriesPreferences("false"),
+    navigateToOffshoreLiabilities,
+    submitOffshoreLiabilities,
+    navigateToLegalInterpretation,
+    submitLegalInterpretation,
+    navigateToOffshoreLiabilitiesTaxNotIncluded,
+    submitOffshoreLiabilitiesTaxNotIncluded,
+    navigateToOffshoreMaxValueAssets,
+    submitOffshoreMaxValueAssets,
+    navigateToOffshoreLiabilitiesSummary,
+    navigateToTaskList
+  )
+
+  setup(
+    "other-liability-issues",
+    "Submit other liability"
+  ).withRequests(
+    navigateToOtherLiabilityIssues,
+    submitOtherLiabilityIssues,
+    navigateToOtherLiabilitiesToFix,
+    submitOtherLiabilitiesToFix,
+    navigateToOtherLiabilitiesSummary ,
+    navigateToTaskList
+  )
+
+  setup(
+    "why-disclosure-now",
+    "add a reason"
+  ).withRequests(
+    navigateToWhyDisclosureNow,
+    submitWhyDisclosureNowPreferences,
+    navigateToReasonForDisclosureNow,
+    submitReasonForDisclosureNow,
+    navigateToWhyDisclosureNotMadeBefore,
+    submitReasonForWhyDisclosureNotMadeBefore,
+    navigateToSomeoneGaveAdvice,
+    submitSomeoneGaveAdvicePreferences,
+    navigateToMakingDisclosureNowSummary,
+    navigateToTaskList
+  )
+
+  setup(
+    "your-offer",
+    "Submit Your Offer"
+  ).withRequests(
+    navigateToYourOffer,
+    submitYourOffer,
+    navigateToDisclosureSubmitted("CFSS-1234567")
+  )
+
 
   runSimulation()
 
