@@ -61,7 +61,7 @@ class Simulation extends PerformanceTestRunner {
     navigateToWhatIsThisDisclosureAbout,
     submitWhatIsThisDisclosureAbout("company"),
     navigateToAreYouAnOfficer,
-    submitAreYouAnOfficer("true"),
+    submitAreYouAnOfficer("yes"),
     navigateToDiscloseOffshoreLiabilities,
     submitDiscloseOffshoreLiabilities("true"),
     submitDiscloseOnshoreLiabilities("true"),
