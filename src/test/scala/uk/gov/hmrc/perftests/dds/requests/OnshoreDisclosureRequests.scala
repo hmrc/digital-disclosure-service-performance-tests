@@ -164,6 +164,7 @@ object OnshoreDisclosureRequests extends Configuration {
       .formParam("interest", "2")
       .formParam("penaltyRate", "2")
       .formParam("penaltyRateReason", "This is test")
+      .formParam("undeclaredIncomeOrGain", "This is test")
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
 

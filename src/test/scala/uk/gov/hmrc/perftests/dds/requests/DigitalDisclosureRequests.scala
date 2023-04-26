@@ -85,14 +85,14 @@ object DigitalDisclosureRequests extends Configuration {
       .check(status.is(303))
 
   val navigateToAreYouAnOfficer: HttpRequestBuilder =
-    http("Navigate to /are-you-an-officer")
-      .get(s"$notificationRoute/are-you-an-officer")
+    http("Navigate to /are-you-the-entity")
+      .get(s"$notificationRoute/are-you-the-entity")
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def submitAreYouAnOfficer(value: String): HttpRequestBuilder =
     http(s"Submit '$value'")
-      .post(s"$notificationRoute/are-you-an-officer")
+      .post(s"$notificationRoute/are-you-the-entity")
       .formParam("value", value)
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
