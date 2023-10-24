@@ -225,11 +225,10 @@ object DigitalDisclosureRequests extends Configuration {
       .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
 
-  def navigateToSubmitted(reference: String): HttpRequestBuilder =
-    http(s"Navigate to /submitted/$reference")
-      .get(s"$notificationRoute/submitted/$reference")
+  val navigateToSubmitted: HttpRequestBuilder =
+    http(s"Navigate to /submitted")
+      .get(s"$notificationRoute/submitted")
       .check(status.is(200))
-      .check(referenceIsDisplayed(reference))
 
   val navigateToMakeADisclosure: HttpRequestBuilder =
     http("Navigate to /make-a-disclosure")

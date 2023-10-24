@@ -106,7 +106,7 @@ class Simulation extends PerformanceTestRunner {
   ).withRequests(
     navigateToCheckYourAnswers,
     submitCheckYourAnswers,
-    navigateToSubmitted("CFSS-1234567") ,
+    navigateToSubmitted,
   )
 
   setup(
