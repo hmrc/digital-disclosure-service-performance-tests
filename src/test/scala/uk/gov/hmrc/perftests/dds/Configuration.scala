@@ -17,8 +17,11 @@
 package uk.gov.hmrc.perftests.dds
 
 import io.gatling.core.Predef._
+import io.gatling.core.check.CheckBuilder
+import io.gatling.core.check.css.CssCheckType
 import io.gatling.http.Predef._
 import io.gatling.http.check.HttpCheck
+import jodd.lagarto.dom.NodeSelector
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 trait Configuration extends ServicesConfiguration {
@@ -27,12 +30,10 @@ trait Configuration extends ServicesConfiguration {
   val addressLookupUrl: String     = baseUrlFor("address-lookup")
   val digitalDisclosureUrl: String = baseUrlFor("digital-disclosure")
 
-  private val csrfTokenPattern: String              = """<input type="hidden" name="csrfToken"\s+value="([^"]+)""""
   private val addressLookupJourneyIdPattern: String = """.*/lookup-address/(.*)/.*"""
   private val referencePattern: String              = ".govuk-panel__body"
 
-  def saveCsrfToken: HttpCheck =
-    regex(_ => csrfTokenPattern).saveAs("csrfToken")
+  def saveCsrfToken: CheckBuilder[CssCheckType, NodeSelector, String] = css("input[name='csrfToken']", "value").optional.saveAs("csrfToken")
 
   def saveAddressLookupJourneyId: HttpCheck =
     headerRegex("location", addressLookupJourneyIdPattern).saveAs("addressLookupJourneyId")
