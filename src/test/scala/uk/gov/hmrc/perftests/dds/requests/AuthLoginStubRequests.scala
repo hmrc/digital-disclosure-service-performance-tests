@@ -30,6 +30,7 @@ object AuthLoginStubRequests extends Configuration {
     http("Navigate to /auth-login-stub/gg-sign-in")
       .get(signInRoute)
       .check(status.is(200))
+      .check(saveCsrfToken)
 
   def signIn(nino: String): HttpRequestBuilder =
     http("Log in")
@@ -42,6 +43,7 @@ object AuthLoginStubRequests extends Configuration {
       .formParam("email", "user@test.com")
       .formParam("credentialRole", "User")
       .formParam("nino", nino)
+      .formParam("csrfToken", "${csrfToken}")
       .check(status.is(303))
       .check(header("Location").is(digitalDisclosureRoute))
 
