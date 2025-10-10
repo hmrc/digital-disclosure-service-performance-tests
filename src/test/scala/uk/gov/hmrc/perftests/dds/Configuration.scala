@@ -33,7 +33,7 @@ trait Configuration extends ServicesConfiguration {
   private val addressLookupJourneyIdPattern: String = """.*/lookup-address/(.*)/.*"""
   private val referencePattern: String              = ".govuk-panel__body"
 
-  def saveCsrfToken: CheckBuilder[CssCheckType, NodeSelector, String] = css("input[name='csrfToken']", "value").optional.saveAs("csrfToken")
+  def saveCsrfToken: CheckBuilder[CssCheckType, NodeSelector] = css("input[name='csrfToken']", "value").optional.saveAs("csrfToken")
 
   def saveAddressLookupJourneyId: HttpCheck =
     headerRegex("location", addressLookupJourneyIdPattern).saveAs("addressLookupJourneyId")

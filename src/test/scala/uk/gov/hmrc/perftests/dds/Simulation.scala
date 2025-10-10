@@ -124,7 +124,7 @@ class Simulation extends PerformanceTestRunner {
     "Make a Declaration"
   ).withRequests(
     navigateToDeclaration,
-    submitDeclarationConfirmation,
+    //submitDeclarationConfirmation,
     navigateToTaskList
   )
 

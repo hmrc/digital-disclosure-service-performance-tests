@@ -36,7 +36,7 @@ object OnshoreDisclosureRequests extends Configuration {
     http(s"Submit reason for disclosure preferences")
       .post(s"$onshoreRoute/reason-for-disclosure")
       .formParam("value[5]", "deliberatelyDidNotNotify")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToCDF: HttpRequestBuilder =
@@ -48,7 +48,7 @@ object OnshoreDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$onshoreRoute/contractual-disclosure-facility")
       .formParam("value", value)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToWhatDoYouNeedToDisclose: HttpRequestBuilder =
@@ -62,7 +62,7 @@ object OnshoreDisclosureRequests extends Configuration {
       .formParam("value[1]", "businessIncomeLiabilities")
       .formParam("value[3]", "company.corporationTaxLiabilities")
       .formParam("value[4]", "company.directorLoanLiabilities")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToCorporationTaxLiabilities: HttpRequestBuilder =
@@ -81,7 +81,7 @@ object OnshoreDisclosureRequests extends Configuration {
       .formParam("howMuchInterest", "2")
       .formParam("penaltyRate", "2")
       .formParam("penaltyRateReason", "This is Test")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToCorporationTaxSummary: HttpRequestBuilder =
@@ -98,7 +98,7 @@ object OnshoreDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$onshoreRoute/corporation-tax-accounting-periods")
       .formParam("value", value)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToDirectorLoanLiabilities: HttpRequestBuilder =
@@ -118,7 +118,7 @@ object OnshoreDisclosureRequests extends Configuration {
       .formParam("interest", "3")
       .formParam("penaltyRate", "3")
       .formParam("penaltyRateReason", "This is Test")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToDirectorLoanLiabilitiesSummary: HttpRequestBuilder =
@@ -135,7 +135,7 @@ object OnshoreDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$onshoreRoute/director-loans-accounting-periods")
       .formParam("value", value)
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOnshoreYears: HttpRequestBuilder =
@@ -147,7 +147,7 @@ object OnshoreDisclosureRequests extends Configuration {
     http(s"Submit")
       .post(s"$onshoreRoute/onshore-years")
       .formParam("value[3]", "2018")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOnshoreLiabilities: HttpRequestBuilder =
@@ -165,7 +165,7 @@ object OnshoreDisclosureRequests extends Configuration {
       .formParam("penaltyRate", "2")
       .formParam("penaltyRateReason", "This is test")
       .formParam("undeclaredIncomeOrGain", "This is test")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOnshoreLiabilitiesSummary: HttpRequestBuilder =

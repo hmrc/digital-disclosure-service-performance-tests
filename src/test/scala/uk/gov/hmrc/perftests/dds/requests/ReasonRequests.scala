@@ -39,7 +39,7 @@ object ReasonRequests extends Configuration{
     http(s"Submit reason for why-disclosure-now")
       .post(s"$reasonRoute/why-disclosure-now")
       .formParam("value[7]", "other")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToReasonForDisclosureNow: HttpRequestBuilder =
@@ -51,7 +51,7 @@ object ReasonRequests extends Configuration{
     http(s"Submit reason for reason-for-disclosure-now")
       .post(s"$reasonRoute/reason-for-disclosure-now")
       .formParam("value", "Test")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToWhyDisclosureNotMadeBefore: HttpRequestBuilder =
@@ -63,7 +63,7 @@ object ReasonRequests extends Configuration{
     http(s"Submit reason for why-disclosure-not-made-before")
       .post(s"$reasonRoute/why-disclosure-not-made-before")
       .formParam("value", "Test")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToSomeoneGaveAdvice: HttpRequestBuilder =
@@ -76,7 +76,7 @@ object ReasonRequests extends Configuration{
     http(s"Submit Preferences for someone-gave-advice")
       .post(s"$reasonRoute/someone-gave-advice")
       .formParam("value", "false")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToMakingDisclosureNowSummary: HttpRequestBuilder =
@@ -93,7 +93,7 @@ object ReasonRequests extends Configuration{
     http(s"Submit Your Offer")
       .post(s"$digitalDisclosureRoute/your-offer")
       .formParam("value", "2")
-      .formParam("csrfToken", "${csrfToken}")
+      .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 
 
