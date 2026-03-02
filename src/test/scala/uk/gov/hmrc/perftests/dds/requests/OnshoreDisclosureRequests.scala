@@ -35,7 +35,45 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitReasonForDisclosurePreferences: HttpRequestBuilder =
     http(s"Submit reason for disclosure preferences")
       .post(s"$onshoreRoute/reason-for-disclosure")
-      .formParam("value[5]", "deliberatelyDidNotNotify")
+      .formParam("value[0]", "didNotNotifyHMRC")
+      .formParam("value[1]", "didNotFile")
+      .formParam("value[2]", "inaccurateReturn")
+      .formParam("csrfToken", "#{csrfToken}")
+      .check(status.is(303))
+
+  val navigateWhyNotNotify: HttpRequestBuilder =
+    http("Navigate to /reason-for-not-notify-tax-liability")
+      .get(s"$onshoreRoute/reason-for-not-notify-tax-liability")
+      .check(status.is(200))
+
+  def submitWhyNotNotify: HttpRequestBuilder =
+    http(s"Submit reason for not notifying")
+      .post(s"$onshoreRoute/reason-for-not-notify-tax-liability")
+      .formParam("value[0]", "deliberatelyDidNotNotify")
+      .formParam("csrfToken", "#{csrfToken}")
+      .check(status.is(303))
+
+  val navigateWhyNotFileOnTime: HttpRequestBuilder =
+    http("Navigate to /reason-for-return-not-filed-on-time")
+      .get(s"$onshoreRoute/reason-for-return-not-filed-on-time")
+      .check(status.is(200))
+
+  def submitWhyNotFileOnTime: HttpRequestBuilder =
+    http(s"Submit reason for not filing on time")
+      .post(s"$onshoreRoute/reason-for-return-not-filed-on-time")
+      .formParam("value[2]", "deliberatelyWithheldInformation")
+      .formParam("csrfToken", "#{csrfToken}")
+      .check(status.is(303))
+
+  val navigateWhySubmittedInaccurateReturn: HttpRequestBuilder =
+    http("Navigate to /reason-for-inaccurate-return")
+      .get(s"$onshoreRoute/reason-for-inaccurate-return")
+      .check(status.is(200))
+
+  def submitWhySubmittedInaccurateReturn: HttpRequestBuilder =
+    http(s"Submit reason inaccurate return")
+      .post(s"$onshoreRoute/reason-for-inaccurate-return")
+      .formParam("value[2]", "deliberatelyInaccurate")
       .formParam("csrfToken", "#{csrfToken}")
       .check(status.is(303))
 

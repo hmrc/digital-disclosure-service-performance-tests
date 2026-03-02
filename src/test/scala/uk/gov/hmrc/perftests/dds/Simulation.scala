@@ -134,6 +134,9 @@ class Simulation extends PerformanceTestRunner {
   ).withRequests(
     navigateToReasonForDisclosure,
     submitReasonForDisclosurePreferences,
+    submitWhyNotNotify,
+    submitWhyNotFileOnTime,
+    submitWhySubmittedInaccurateReturn,
     navigateToCDF ,
     submitCDFPreferences("true") ,
     navigateToWhatDoYouNeedToDisclose,
@@ -174,6 +177,9 @@ class Simulation extends PerformanceTestRunner {
   ).withRequests(
     navigateToReasonForDisclosureOffshore,
     submitReasonForDisclosurePreferencesOffshore,
+    submitWhyNotNotifyOffshore,
+    submitWhyNotFileOnTimeOffshore,
+    submitWhySubmittedInaccurateReturnOffshore,
     navigateToCDFOffshore,
     submitCDFPreferencesOffshore("true"),
   )
