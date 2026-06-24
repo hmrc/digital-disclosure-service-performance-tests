@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ trait Configuration extends ServicesConfiguration {
   def saveCsrfToken: CheckBuilder[CssCheckType, NodeSelector] = css("input[name='csrfToken']", "value").optional.saveAs("csrfToken")
 
   def saveAddressLookupJourneyId: HttpCheck =
-    headerRegex("location", addressLookupJourneyIdPattern).saveAs("addressLookupJourneyId")
+    headerRegex(_ => "location", addressLookupJourneyIdPattern).saveAs("addressLookupJourneyId")
 
   def referenceIsDisplayed(reference: String): HttpCheck =
     css(s"$referencePattern:contains('$reference')").exists

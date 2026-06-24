@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,16 +35,16 @@ object AuthLoginStubRequests extends Configuration {
   def signIn(nino: String): HttpRequestBuilder =
     http("Log in")
       .post(signInRoute)
-      .formParam("redirectionUrl", digitalDisclosureRoute)
-      .formParam("credentialStrength", "strong")
-      .formParam("authorityId", "")
-      .formParam("confidenceLevel", "250")
-      .formParam("affinityGroup", "Organisation")
-      .formParam("email", "user@test.com")
-      .formParam("credentialRole", "User")
-      .formParam("nino", nino)
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("redirectionUrl", _ => digitalDisclosureRoute)
+      .formParam("credentialStrength", _ => "strong")
+      .formParam("authorityId", _ => "")
+      .formParam("confidenceLevel", _ => "250")
+      .formParam("affinityGroup", _ => "Organisation")
+      .formParam("email", _ => "user@test.com")
+      .formParam("credentialRole", _ => "User")
+      .formParam("nino", _ => nino)
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
-      .check(header("Location").is(digitalDisclosureRoute))
+      .check(header(_ => "Location").is(digitalDisclosureRoute))
 
 }
