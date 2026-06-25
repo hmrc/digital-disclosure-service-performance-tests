@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,8 @@ object OtherLiabilityRequests extends Configuration{
   def submitOtherLiabilityIssues: HttpRequestBuilder =
     http(s"Submit other liability Issues")
       .post(s"$otherLiabilityRoute/other-liability-issues")
-      .formParam("value[4]", "other")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[4]", _ => "other")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOtherLiabilitiesToFix: HttpRequestBuilder =
@@ -49,8 +49,8 @@ object OtherLiabilityRequests extends Configuration{
   def submitOtherLiabilitiesToFix: HttpRequestBuilder =
     http(s"Submit Other Liabilities To Fix")
       .post(s"$otherLiabilityRoute/other-liabilities-to-fix")
-      .formParam("value", "Test")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => "Test")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOtherLiabilitiesSummary: HttpRequestBuilder =

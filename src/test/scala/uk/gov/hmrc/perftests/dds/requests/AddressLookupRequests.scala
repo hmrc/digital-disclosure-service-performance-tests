@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,10 +39,10 @@ object AddressLookupRequests extends Configuration {
   def submitCountryPicker(country: String, countryCode: String): HttpRequestBuilder =
     http(s"Submit '$country ($countryCode)'")
       .post(addressLookupRoute + "/#{addressLookupJourneyId}/country-picker")
-      .formParam("countryCodeAutocomplete", country)
-      .formParam("countryCode", countryCode)
-      .formParam("continue", "")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("countryCodeAutocomplete", _ => country)
+      .formParam("countryCode", _ => countryCode)
+      .formParam("continue", _ => "")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToLookup: HttpRequestBuilder =
@@ -66,15 +66,15 @@ object AddressLookupRequests extends Configuration {
   ): HttpRequestBuilder =
     http(s"Submit '$addressLineOne, $addressLineTwo, $town, $postcode, $countryCode'")
       .post(addressLookupRoute + "/#{addressLookupJourneyId}/edit")
-      .formParam("organisation", "")
-      .formParam("line1", addressLineOne)
-      .formParam("line2", addressLineTwo)
-      .formParam("line3", "")
-      .formParam("town", town)
-      .formParam("postcode", postcode)
-      .formParam("countryCode", countryCode)
-      .formParam("continue", "")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("organisation", _ => "")
+      .formParam("line1", _ => addressLineOne)
+      .formParam("line2", _ => addressLineTwo)
+      .formParam("line3", _ => "")
+      .formParam("town", _ => town)
+      .formParam("postcode", _ => postcode)
+      .formParam("countryCode", _ => countryCode)
+      .formParam("continue", _ => "")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToConfirm: HttpRequestBuilder =
@@ -86,8 +86,8 @@ object AddressLookupRequests extends Configuration {
   def submitConfirm(): HttpRequestBuilder =
     http(s"Submit confirm")
       .post(addressLookupRoute + "/#{addressLookupJourneyId}/confirm")
-      .formParam("continue", "")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("continue", _ => "")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
 }

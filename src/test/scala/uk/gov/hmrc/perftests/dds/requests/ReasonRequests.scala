@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,8 +38,8 @@ object ReasonRequests extends Configuration{
   def submitWhyDisclosureNowPreferences: HttpRequestBuilder =
     http(s"Submit reason for why-disclosure-now")
       .post(s"$reasonRoute/why-disclosure-now")
-      .formParam("value[7]", "other")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[7]", _ => "other")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToReasonForDisclosureNow: HttpRequestBuilder =
@@ -50,8 +50,8 @@ object ReasonRequests extends Configuration{
   def submitReasonForDisclosureNow: HttpRequestBuilder =
     http(s"Submit reason for reason-for-disclosure-now")
       .post(s"$reasonRoute/reason-for-disclosure-now")
-      .formParam("value", "Test")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => "Test")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToWhyDisclosureNotMadeBefore: HttpRequestBuilder =
@@ -62,8 +62,8 @@ object ReasonRequests extends Configuration{
   def submitReasonForWhyDisclosureNotMadeBefore: HttpRequestBuilder =
     http(s"Submit reason for why-disclosure-not-made-before")
       .post(s"$reasonRoute/why-disclosure-not-made-before")
-      .formParam("value", "Test")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => "Test")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToSomeoneGaveAdvice: HttpRequestBuilder =
@@ -75,8 +75,8 @@ object ReasonRequests extends Configuration{
   def submitSomeoneGaveAdvicePreferences: HttpRequestBuilder =
     http(s"Submit Preferences for someone-gave-advice")
       .post(s"$reasonRoute/someone-gave-advice")
-      .formParam("value", "false")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => "false")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToMakingDisclosureNowSummary: HttpRequestBuilder =
@@ -92,8 +92,8 @@ object ReasonRequests extends Configuration{
   def submitYourOffer: HttpRequestBuilder =
     http(s"Submit Your Offer")
       .post(s"$digitalDisclosureRoute/your-offer")
-      .formParam("value", "2")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => "2")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
 

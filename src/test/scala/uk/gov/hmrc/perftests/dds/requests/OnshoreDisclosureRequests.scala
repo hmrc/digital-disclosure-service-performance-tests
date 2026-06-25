@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,10 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitReasonForDisclosurePreferences: HttpRequestBuilder =
     http(s"Submit reason for disclosure preferences")
       .post(s"$onshoreRoute/reason-for-disclosure")
-      .formParam("value[0]", "didNotNotifyHMRC")
-      .formParam("value[1]", "didNotFile")
-      .formParam("value[2]", "inaccurateReturn")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[0]", _ => "didNotNotifyHMRC")
+      .formParam("value[1]", _ => "didNotFile")
+      .formParam("value[2]", _ => "inaccurateReturn")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateWhyNotNotify: HttpRequestBuilder =
@@ -49,8 +49,8 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitWhyNotNotify: HttpRequestBuilder =
     http(s"Submit reason for not notifying")
       .post(s"$onshoreRoute/reason-for-not-notify-tax-liability")
-      .formParam("value[0]", "deliberatelyDidNotNotify")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[0]", _ => "deliberatelyDidNotNotify")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateWhyNotFileOnTime: HttpRequestBuilder =
@@ -61,8 +61,8 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitWhyNotFileOnTime: HttpRequestBuilder =
     http(s"Submit reason for not filing on time")
       .post(s"$onshoreRoute/reason-for-return-not-filed-on-time")
-      .formParam("value[2]", "deliberatelyWithheldInformation")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[2]", _ => "deliberatelyWithheldInformation")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateWhySubmittedInaccurateReturn: HttpRequestBuilder =
@@ -73,8 +73,8 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitWhySubmittedInaccurateReturn: HttpRequestBuilder =
     http(s"Submit reason inaccurate return")
       .post(s"$onshoreRoute/reason-for-inaccurate-return")
-      .formParam("value[2]", "deliberatelyInaccurate")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[2]", _ => "deliberatelyInaccurate")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToCDF: HttpRequestBuilder =
@@ -85,8 +85,8 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitCDFPreferences(value: String): HttpRequestBuilder =
     http(s"Submit '$value'")
       .post(s"$onshoreRoute/contractual-disclosure-facility")
-      .formParam("value", value)
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => value)
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToWhatDoYouNeedToDisclose: HttpRequestBuilder =
@@ -97,10 +97,10 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitDisclosurePreferences: HttpRequestBuilder =
     http(s"Submit Disclosure Preferences")
       .post(s"$onshoreRoute/what-do-you-need-to-disclose")
-      .formParam("value[1]", "businessIncomeLiabilities")
-      .formParam("value[3]", "company.corporationTaxLiabilities")
-      .formParam("value[4]", "company.directorLoanLiabilities")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[1]", _ => "businessIncomeLiabilities")
+      .formParam("value[3]", _ => "company.corporationTaxLiabilities")
+      .formParam("value[4]", _ => "company.directorLoanLiabilities")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToCorporationTaxLiabilities: HttpRequestBuilder =
@@ -111,15 +111,15 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitCorporationTaxLiabilities: HttpRequestBuilder =
     http(s"Submit values for CorporationTaxLiabilities")
       .post(s"$onshoreRoute/corporation-tax-liabilities/0")
-      .formParam("periodEnd.day", "2")
-      .formParam("periodEnd.month", "2")
-      .formParam("periodEnd.year", "2012")
-      .formParam("howMuchIncome", "2")
-      .formParam("howMuchUnpaid", "2")
-      .formParam("howMuchInterest", "2")
-      .formParam("penaltyRate", "2")
-      .formParam("penaltyRateReason", "This is Test")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("periodEnd.day", _ => "2")
+      .formParam("periodEnd.month", _ => "2")
+      .formParam("periodEnd.year", _ => "2012")
+      .formParam("howMuchIncome", _ => "2")
+      .formParam("howMuchUnpaid", _ => "2")
+      .formParam("howMuchInterest", _ => "2")
+      .formParam("penaltyRate", _ => "2")
+      .formParam("penaltyRateReason", _ => "This is Test")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToCorporationTaxSummary: HttpRequestBuilder =
@@ -135,8 +135,8 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitCTAccountingPeriodsPreferences(value: String): HttpRequestBuilder =
     http(s"Submit '$value'")
       .post(s"$onshoreRoute/corporation-tax-accounting-periods")
-      .formParam("value", value)
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => value)
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToDirectorLoanLiabilities: HttpRequestBuilder =
@@ -147,16 +147,16 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitDirectorLoanLiabilities: HttpRequestBuilder =
     http(s"Submit values for DirectorLoanLiabilities")
       .post(s"$onshoreRoute/director-loan-liabilities/0")
-      .formParam("name", "DL Name")
-      .formParam("periodEnd.day", "3")
-      .formParam("periodEnd.month", "3")
-      .formParam("periodEnd.year", "2013")
-      .formParam("overdrawn", "3")
-      .formParam("unpaidTax", "3")
-      .formParam("interest", "3")
-      .formParam("penaltyRate", "3")
-      .formParam("penaltyRateReason", "This is Test")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("name", _ => "DL Name")
+      .formParam("periodEnd.day", _ => "3")
+      .formParam("periodEnd.month", _ => "3")
+      .formParam("periodEnd.year", _ => "2013")
+      .formParam("overdrawn", _ => "3")
+      .formParam("unpaidTax", _ => "3")
+      .formParam("interest", _ => "3")
+      .formParam("penaltyRate", _ => "3")
+      .formParam("penaltyRateReason", _ => "This is Test")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToDirectorLoanLiabilitiesSummary: HttpRequestBuilder =
@@ -172,8 +172,8 @@ object OnshoreDisclosureRequests extends Configuration {
   def submitDLAccountingPeriodsPreferences(value: String): HttpRequestBuilder =
     http(s"Submit '$value'")
       .post(s"$onshoreRoute/director-loans-accounting-periods")
-      .formParam("value", value)
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value", _ => value)
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOnshoreYears: HttpRequestBuilder =
@@ -184,8 +184,8 @@ object OnshoreDisclosureRequests extends Configuration {
   val submitOnshoreYearsSelection: HttpRequestBuilder =
     http(s"Submit")
       .post(s"$onshoreRoute/onshore-years")
-      .formParam("value[3]", "2018")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("value[3]", _ => "2018")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOnshoreLiabilities: HttpRequestBuilder =
@@ -196,14 +196,14 @@ object OnshoreDisclosureRequests extends Configuration {
   val submitOnshoreLiabilities: HttpRequestBuilder =
     http(s"Submit")
       .post(s"$onshoreRoute/onshore-liabilities/0")
-      .formParam("businessIncome", "2")
-      .formParam("unpaidTax", "2")
-      .formParam("niContributions", "2")
-      .formParam("interest", "2")
-      .formParam("penaltyRate", "2")
-      .formParam("penaltyRateReason", "This is test")
-      .formParam("undeclaredIncomeOrGain", "This is test")
-      .formParam("csrfToken", "#{csrfToken}")
+      .formParam("businessIncome", _ => "2")
+      .formParam("unpaidTax", _ => "2")
+      .formParam("niContributions", _ => "2")
+      .formParam("interest", _ => "2")
+      .formParam("penaltyRate", _ => "2")
+      .formParam("penaltyRateReason", _ => "This is test")
+      .formParam("undeclaredIncomeOrGain", _ => "This is test")
+      .formParam("csrfToken", _ => "#{csrfToken}")
       .check(status.is(303))
 
   val navigateToOnshoreLiabilitiesSummary: HttpRequestBuilder =
