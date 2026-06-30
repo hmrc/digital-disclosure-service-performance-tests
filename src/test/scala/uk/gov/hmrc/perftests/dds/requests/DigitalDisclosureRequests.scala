@@ -42,7 +42,8 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$digitalDisclosureRoute/using-this-service")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))     
 
   val navigateToLetterFromHmrc: HttpRequestBuilder =
@@ -55,7 +56,8 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/letter-from-hmrc")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
+      
       .check(status.is(303))
 
   val navigateToHmrcLetterReference: HttpRequestBuilder =
@@ -68,7 +70,8 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/hmrc-letter-reference")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
+      
       .check(status.is(303))
 
   val navigateToWhatIsThisDisclosureAbout: HttpRequestBuilder =
@@ -81,7 +84,8 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/what-is-this-disclosure-about")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+     
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToAreYouAnOfficer: HttpRequestBuilder =
@@ -94,7 +98,8 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/are-you-the-entity")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
+      
       .check(status.is(303))
 
   val navigateToDiscloseOffshoreLiabilities: HttpRequestBuilder =
@@ -107,14 +112,15 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/disclose-offshore-liabilities")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
+      
       .check(status.is(303))
 
   def submitDiscloseOnshoreLiabilities(value: String): HttpRequestBuilder =
     http(s"Submit '$value'")
       .post(s"$notificationRoute/disclose-onshore-liabilities")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToDiscloseOnshoreLiabilitiesOnly: HttpRequestBuilder =
@@ -132,7 +138,8 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/company-name")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
+      
       .check(status.is(303))
 
   val navigateToCompanyRegistration: HttpRequestBuilder =
@@ -145,7 +152,8 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/company-registration")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
+      
       .check(status.is(303))
 
   val navigateToCompanyAddressLookup: HttpRequestBuilder =
@@ -164,7 +172,7 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/your-full-name")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToYourTelephoneNumber: HttpRequestBuilder =
@@ -177,7 +185,7 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/your-telephone-number")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToContactPreferences: HttpRequestBuilder =
@@ -191,7 +199,8 @@ object DigitalDisclosureRequests extends Configuration {
       .post(s"$notificationRoute/contact-preference")
       .formParam("value[0]", _ => "email")
       .formParam("value[1]", _ => "telephone")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
+     
       .check(status.is(303))
 
   val navigateToYourEmailAddress: HttpRequestBuilder =
@@ -204,7 +213,7 @@ object DigitalDisclosureRequests extends Configuration {
     http(s"Submit '$value'")
       .post(s"$notificationRoute/your-email-address")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToYourAddressLookup: HttpRequestBuilder =
@@ -222,7 +231,7 @@ object DigitalDisclosureRequests extends Configuration {
   val submitCheckYourAnswers: HttpRequestBuilder =
     http(s"Submit answers")
       .post(s"$notificationRoute/check-your-answers")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToSubmitted: HttpRequestBuilder =
@@ -238,7 +247,7 @@ object DigitalDisclosureRequests extends Configuration {
   val submitMakeADisclosure: HttpRequestBuilder =
     http(s"make-a-disclosure")
       .post(s"$digitalDisclosureRoute/make-a-disclosure")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToTaskList: HttpRequestBuilder =
@@ -255,7 +264,7 @@ object DigitalDisclosureRequests extends Configuration {
   val submitDeclarationConfirmation: HttpRequestBuilder =
     http(s"confirm")
       .get(s"$digitalDisclosureRoute/declaration/confirm")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
 
