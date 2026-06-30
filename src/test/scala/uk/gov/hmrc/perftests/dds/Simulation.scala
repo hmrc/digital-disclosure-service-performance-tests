@@ -214,7 +214,7 @@ class Simulation extends PerformanceTestRunner {
     submitOtherLiabilityIssues,
     navigateToOtherLiabilitiesToFix,
     submitOtherLiabilitiesToFix,
-    navigateToOtherLiabilitiesSummary ,
+    navigateToOtherLiabilitiesSummary,
     navigateToTaskList
   )
 

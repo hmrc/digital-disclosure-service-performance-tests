@@ -40,7 +40,7 @@ object OffshoreDisclosureRequests extends Configuration{
       .formParam("value[0]", _ => "didNotNotifyHMRC")
       .formParam("value[1]", _ => "didNotFile")
       .formParam("value[2]", _ => "inaccurateReturn")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateWhyNotNotifyOffshore: HttpRequestBuilder =
@@ -52,7 +52,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit reason for not notifying")
       .post(s"$offshoreRoute/reason-for-not-notify-tax-liability")
       .formParam("value[2]", _ => "deliberatelyDidNotNotify")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateWhyNotFileOnTimeOffshore: HttpRequestBuilder =
@@ -64,7 +64,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit reason for not filing on time")
       .post(s"$offshoreRoute/reason-for-return-not-filed-on-time")
       .formParam("value[2]", _ => "deliberatelyWithheldInformation")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateWhySubmittedInaccurateReturnOffshore: HttpRequestBuilder =
@@ -76,7 +76,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit reason inaccurate return")
       .post(s"$offshoreRoute/reason-for-inaccurate-return")
       .formParam("value[2]", _ => "deliberatelyInaccurate")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToCDFOffshore: HttpRequestBuilder =
@@ -88,7 +88,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit '$value'")
       .post(s"$offshoreRoute/contractual-disclosure-facility")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOffshoreYears: HttpRequestBuilder =
@@ -100,7 +100,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit")
       .post(s"$offshoreRoute/offshore-years")
       .formParam("value[3]", _ => "2018")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOffshoreLiabilitiesCountry: HttpRequestBuilder =
@@ -112,7 +112,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit '$value'")
       .post(s"$offshoreRoute/offshore-liabilities-country")
       .formParam("country", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToCountriesOrTerritories: HttpRequestBuilder =
@@ -124,7 +124,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit '$value'")
       .post(s"$offshoreRoute/countries-or-territories")
       .formParam("value", _ => value)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOffshoreLiabilities: HttpRequestBuilder =
@@ -144,7 +144,7 @@ object OffshoreDisclosureRequests extends Configuration{
       .formParam("penaltyRateReason", _ => "This is test")
       .formParam("undeclaredIncomeOrGain", _ => "This is test")
       .formParam("foreignTaxCredit", _ => "false")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToLegalInterpretation: HttpRequestBuilder =
@@ -156,7 +156,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit")
       .post(s"$offshoreRoute/offshore-liabilities-interpretation")
       .formParam("value[6]", _ => "inheritanceTaxIssues")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOffshoreLiabilitiesTaxNotIncluded: HttpRequestBuilder =
@@ -168,7 +168,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit")
       .post(s"$offshoreRoute/offshore-liabilities-tax-not-included")
       .formParam("value", _ => "moreThanTenThousandLessThanOneLakh")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOffshoreMaxValueAssets: HttpRequestBuilder =
@@ -180,7 +180,7 @@ object OffshoreDisclosureRequests extends Configuration{
     http(s"Submit")
       .post(s"$offshoreRoute/offshore-liabilities-maximum-value-of-assets")
       .formParam("value", _ => "over1B")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOffshoreLiabilitiesSummary: HttpRequestBuilder =

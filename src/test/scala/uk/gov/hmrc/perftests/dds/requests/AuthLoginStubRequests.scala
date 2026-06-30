@@ -43,7 +43,7 @@ object AuthLoginStubRequests extends Configuration {
       .formParam("email", _ => "user@test.com")
       .formParam("credentialRole", _ => "User")
       .formParam("nino", _ => nino)
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
       .check(header(_ => "Location").is(digitalDisclosureRoute))
 

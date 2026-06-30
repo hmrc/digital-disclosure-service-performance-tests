@@ -42,7 +42,7 @@ object AddressLookupRequests extends Configuration {
       .formParam("countryCodeAutocomplete", _ => country)
       .formParam("countryCode", _ => countryCode)
       .formParam("continue", _ => "")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToLookup: HttpRequestBuilder =
@@ -74,8 +74,8 @@ object AddressLookupRequests extends Configuration {
       .formParam("postcode", _ => postcode)
       .formParam("countryCode", _ => countryCode)
       .formParam("continue", _ => "")
-      .formParam("csrfToken", _ => "#{csrfToken}")
-      .check(status.is(303))
+      .formParam("csrfToken", _("csrfToken").as[String])
+       .check(status.is(303))
 
   val navigateToConfirm: HttpRequestBuilder =
     http("Navigate to /confirm")
@@ -87,7 +87,7 @@ object AddressLookupRequests extends Configuration {
     http(s"Submit confirm")
       .post(addressLookupRoute + "/#{addressLookupJourneyId}/confirm")
       .formParam("continue", _ => "")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
 }

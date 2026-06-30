@@ -38,7 +38,7 @@ object OtherLiabilityRequests extends Configuration{
     http(s"Submit other liability Issues")
       .post(s"$otherLiabilityRoute/other-liability-issues")
       .formParam("value[4]", _ => "other")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOtherLiabilitiesToFix: HttpRequestBuilder =
@@ -50,7 +50,7 @@ object OtherLiabilityRequests extends Configuration{
     http(s"Submit Other Liabilities To Fix")
       .post(s"$otherLiabilityRoute/other-liabilities-to-fix")
       .formParam("value", _ => "Test")
-      .formParam("csrfToken", _ => "#{csrfToken}")
+      .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   val navigateToOtherLiabilitiesSummary: HttpRequestBuilder =
