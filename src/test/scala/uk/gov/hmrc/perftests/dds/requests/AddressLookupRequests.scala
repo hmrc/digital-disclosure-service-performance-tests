@@ -31,12 +31,11 @@ object AddressLookupRequests extends Configuration {
       .get(addressLookupRoute + "/#{addressLookupJourneyId}/begin")
       .check(status.is(303))
 
-  val navigateToCountryPicker: HttpRequestBuilder = {
+  val navigateToCountryPicker: HttpRequestBuilder =
     navigateToPage(
       "/country-picker",
       addressLookupRoute + "/#{addressLookupJourneyId}/country-picker"
     )
-  }
 
   def submitCountryPicker(country: String, countryCode: String): HttpRequestBuilder =
     http(s"Submit '$country ($countryCode)'")
@@ -47,19 +46,17 @@ object AddressLookupRequests extends Configuration {
       .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
-  val navigateToLookup: HttpRequestBuilder = {
+  val navigateToLookup: HttpRequestBuilder =
     navigateToPage(
       "/lookup",
       addressLookupRoute + "/#{addressLookupJourneyId}/lookup"
     )
-  }
 
-  val navigateToEdit: HttpRequestBuilder = {
+  val navigateToEdit: HttpRequestBuilder =
     navigateToPage(
       "/edit",
       addressLookupRoute + "/#{addressLookupJourneyId}/edit"
     )
-  }
 
   def submitEdit(
     addressLineOne: String,
@@ -79,22 +76,20 @@ object AddressLookupRequests extends Configuration {
       .formParam("countryCode", _ => countryCode)
       .formParam("continue", _ => "")
       .formParam("csrfToken", _("csrfToken").as[String])
-       .check(status.is(303))
+      .check(status.is(303))
 
-  val navigateToConfirm: HttpRequestBuilder = {
+  val navigateToConfirm: HttpRequestBuilder =
     navigateToPage(
       "/confirm",
       addressLookupRoute + "/#{addressLookupJourneyId}/confirm"
     )
-  }
 
-  def submitConfirm(): HttpRequestBuilder = {
+  def submitConfirm(): HttpRequestBuilder =
     submitPageWithFormParams(
       "/confirm",
       addressLookupRoute + "/#{addressLookupJourneyId}/confirm",
       "continue",
       ""
     )
-  }
 
 }

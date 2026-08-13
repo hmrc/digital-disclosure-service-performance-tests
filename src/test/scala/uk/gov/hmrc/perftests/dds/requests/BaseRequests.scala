@@ -24,35 +24,35 @@ import uk.gov.hmrc.perftests.dds.Configuration
 object BaseRequests extends Configuration {
 
   def navigateToPage(
-      pageName: String,
-      url: String
-                    ): HttpRequestBuilder =
+    pageName: String,
+    url: String
+  ): HttpRequestBuilder =
     http(s"Navigate to $pageName")
       .get(url)
       .check(status.is(200))
       .check(saveCsrfToken)
 
   def navigateToAddressLookup(
-                      pageName: String,
-                      url: String
-                    ): HttpRequestBuilder =
+    pageName: String,
+    url: String
+  ): HttpRequestBuilder =
     http(s"Navigate to $pageName")
       .get(url)
       .check(status.is(303))
       .check(saveAddressLookupJourneyId)
 
   def navigateToPageWithoutCsrf(
-                               pageName: String,
-                               url: String
-                             ): HttpRequestBuilder =
+    pageName: String,
+    url: String
+  ): HttpRequestBuilder =
     http(s"Navigate to $pageName")
       .get(url)
       .check(status.is(200))
-      
+
   def submitPage(
-      pageName: String,
-      url: String
-                ): HttpRequestBuilder =
+    pageName: String,
+    url: String
+  ): HttpRequestBuilder =
     http(s"Submit '$pageName'")
       .post(url)
       .formParam("value", _ => pageName)
@@ -60,20 +60,20 @@ object BaseRequests extends Configuration {
       .check(status.is(303))
 
   def submitPageWithoutValue(
-                  pageName: String,
-                  url: String
-                ): HttpRequestBuilder =
+    pageName: String,
+    url: String
+  ): HttpRequestBuilder =
     http(s"Submit '$pageName''")
       .post(url)
       .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
   def submitPageWithFormParams(
-                  pageName: String,
-                  url: String,
-                  formParamName: String,
-                  value: String
-                ): HttpRequestBuilder =
+    pageName: String,
+    url: String,
+    formParamName: String,
+    value: String
+  ): HttpRequestBuilder =
     http(s"Submit '$pageName'")
       .post(url)
       .formParam(formParamName, _ => value)

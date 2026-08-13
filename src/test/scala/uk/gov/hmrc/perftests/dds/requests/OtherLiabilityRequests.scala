@@ -20,51 +20,46 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
 import uk.gov.hmrc.perftests.dds.requests.BaseRequests.*
 
-object OtherLiabilityRequests extends Configuration{
+object OtherLiabilityRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
-  val notificationRoute = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute = s"$digitalDisclosureRoute/onshore"
-  val offshoreRoute = s"$digitalDisclosureRoute/offshore"
-  val otherLiabilityRoute = s"$digitalDisclosureRoute/other-liabilities"
+  val notificationRoute      = s"$digitalDisclosureRoute/notification"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
+  val offshoreRoute          = s"$digitalDisclosureRoute/offshore"
+  val otherLiabilityRoute    = s"$digitalDisclosureRoute/other-liabilities"
 
-  val navigateToOtherLiabilityIssues: HttpRequestBuilder = {
+  val navigateToOtherLiabilityIssues: HttpRequestBuilder =
     navigateToPage(
       "/other-liability-issues",
       s"$otherLiabilityRoute/other-liability-issues"
     )
-  }
 
-  def submitOtherLiabilityIssues: HttpRequestBuilder = {
+  def submitOtherLiabilityIssues: HttpRequestBuilder =
     submitPageWithFormParams(
       "other liability Issues",
       s"$otherLiabilityRoute/other-liability-issues",
       "value[4]",
       "other"
     )
-  }
 
-  val navigateToOtherLiabilitiesToFix: HttpRequestBuilder = {
+  val navigateToOtherLiabilitiesToFix: HttpRequestBuilder =
     navigateToPage(
       "/other-liabilities-to-fix",
       s"$otherLiabilityRoute/other-liabilities-to-fix"
     )
-  }
 
-  def submitOtherLiabilitiesToFix: HttpRequestBuilder = {
+  def submitOtherLiabilitiesToFix: HttpRequestBuilder =
     submitPageWithFormParams(
       "other Liabilities To Fix",
       s"$otherLiabilityRoute/other-liabilities-to-fix",
       "value",
       "Test"
     )
-  }
 
-  val navigateToOtherLiabilitiesSummary: HttpRequestBuilder = {
+  val navigateToOtherLiabilitiesSummary: HttpRequestBuilder =
     navigateToPage(
       "/review-other-liability-issues",
       s"$otherLiabilityRoute/review-other-liability-issues"
     )
-  }
 
 }

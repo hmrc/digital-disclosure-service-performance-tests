@@ -27,12 +27,11 @@ object AuthLoginStubRequests extends Configuration {
   val signInRoute: String    = s"$authLoginStubUrl/auth-login-stub/gg-sign-in"
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
 
-  val navigateToSignIn: HttpRequestBuilder = {
+  val navigateToSignIn: HttpRequestBuilder =
     navigateToPage(
       "/auth-login-stub/gg-sign-in",
       signInRoute
     )
-  }
 
   def signIn(nino: String): HttpRequestBuilder =
     http("Log in")

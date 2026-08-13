@@ -22,20 +22,18 @@ import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
 import uk.gov.hmrc.perftests.dds.requests.BaseRequests._
 
-object OffshoreDisclosureRequests extends Configuration{
+object OffshoreDisclosureRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
-  val notificationRoute = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute = s"$digitalDisclosureRoute/onshore"
-  val offshoreRoute = s"$digitalDisclosureRoute/offshore"
+  val notificationRoute      = s"$digitalDisclosureRoute/notification"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
+  val offshoreRoute          = s"$digitalDisclosureRoute/offshore"
 
-
-  val navigateToReasonForDisclosureOffshore: HttpRequestBuilder = {
+  val navigateToReasonForDisclosureOffshore: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
       "/reason-for-disclosure",
       s"$offshoreRoute/reason-for-disclosure"
     )
-  }
 
   def submitReasonForDisclosurePreferencesOffshore: HttpRequestBuilder =
     http(s"Submit reason for disclosure preferences")
@@ -52,14 +50,13 @@ object OffshoreDisclosureRequests extends Configuration{
       s"$offshoreRoute/reason-for-not-notify-tax-liability"
     )
 
-  def submitWhyNotNotifyOffshore: HttpRequestBuilder = {
+  def submitWhyNotNotifyOffshore: HttpRequestBuilder =
     submitPageWithFormParams(
       "reason for not notifying",
       s"$offshoreRoute/reason-for-not-notify-tax-liability",
       "value[2]",
       "deliberatelyDidNotNotify"
     )
-  }
 
   val navigateWhyNotFileOnTimeOffshore: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -95,12 +92,11 @@ object OffshoreDisclosureRequests extends Configuration{
       s"$offshoreRoute/contractual-disclosure-facility"
     )
 
-  def submitCDFPreferencesOffshore(value: String): HttpRequestBuilder = {
+  def submitCDFPreferencesOffshore(value: String): HttpRequestBuilder =
     submitPage(
       value,
       s"$offshoreRoute/contractual-disclosure-facility"
     )
-  }
 
   val navigateToOffshoreYears: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -136,12 +132,11 @@ object OffshoreDisclosureRequests extends Configuration{
       s"$offshoreRoute/countries-or-territories"
     )
 
-  def submitCountriesOrTerritoriesPreferences(value: String): HttpRequestBuilder = {
+  def submitCountriesOrTerritoriesPreferences(value: String): HttpRequestBuilder =
     submitPage(
       value,
       s"$offshoreRoute/countries-or-territories"
     )
-  }
 
   val navigateToOffshoreLiabilities: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -184,12 +179,11 @@ object OffshoreDisclosureRequests extends Configuration{
       s"$offshoreRoute/offshore-liabilities-tax-not-included"
     )
 
-  val submitOffshoreLiabilitiesTaxNotIncluded: HttpRequestBuilder = {
+  val submitOffshoreLiabilitiesTaxNotIncluded: HttpRequestBuilder =
     submitPage(
       "moreThanTenThousandLessThanOneLakh",
       s"$offshoreRoute/offshore-liabilities-tax-not-included"
     )
-  }
 
   val navigateToOffshoreMaxValueAssets: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -197,18 +191,16 @@ object OffshoreDisclosureRequests extends Configuration{
       s"$offshoreRoute/offshore-liabilities-maximum-value-of-assets"
     )
 
-  val submitOffshoreMaxValueAssets: HttpRequestBuilder = {
+  val submitOffshoreMaxValueAssets: HttpRequestBuilder =
     submitPage(
       "over1B",
       s"$offshoreRoute/offshore-liabilities-maximum-value-of-assets"
     )
-  }
 
   val navigateToOffshoreLiabilitiesSummary: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
       "/offshore-liabilities-summary",
       s"$offshoreRoute/offshore-liabilities-summary"
     )
-
 
 }

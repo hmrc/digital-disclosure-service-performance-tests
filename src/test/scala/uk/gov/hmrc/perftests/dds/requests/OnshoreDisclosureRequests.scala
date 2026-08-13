@@ -25,15 +25,14 @@ import uk.gov.hmrc.perftests.dds.requests.BaseRequests._
 object OnshoreDisclosureRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
-  val notificationRoute = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute = s"$digitalDisclosureRoute/onshore"
+  val notificationRoute      = s"$digitalDisclosureRoute/notification"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
 
-  val navigateToReasonForDisclosure: HttpRequestBuilder = {
+  val navigateToReasonForDisclosure: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
       "/reason-for-disclosure",
       s"$onshoreRoute/reason-for-disclosure"
     )
-  }
 
   def submitReasonForDisclosurePreferences: HttpRequestBuilder =
     http(s"Submit reason for disclosure preferences")
@@ -50,14 +49,13 @@ object OnshoreDisclosureRequests extends Configuration {
       s"$onshoreRoute/reason-for-not-notify-tax-liability"
     )
 
-  def submitWhyNotNotify: HttpRequestBuilder = {
+  def submitWhyNotNotify: HttpRequestBuilder =
     submitPageWithFormParams(
       "reason for not notifying",
       s"$onshoreRoute/reason-for-not-notify-tax-liability",
       "value[0]",
       "deliberatelyDidNotNotify"
     )
-  }
 
   val navigateWhyNotFileOnTime: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -93,12 +91,11 @@ object OnshoreDisclosureRequests extends Configuration {
       s"$onshoreRoute/contractual-disclosure-facility"
     )
 
-  def submitCDFPreferences(value: String): HttpRequestBuilder = {
+  def submitCDFPreferences(value: String): HttpRequestBuilder =
     submitPage(
       value,
       s"$onshoreRoute/contractual-disclosure-facility"
     )
-  }
 
   val navigateToWhatDoYouNeedToDisclose: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -147,12 +144,11 @@ object OnshoreDisclosureRequests extends Configuration {
       s"$onshoreRoute/corporation-tax-accounting-periods"
     )
 
-  def submitCTAccountingPeriodsPreferences(value: String): HttpRequestBuilder = {
+  def submitCTAccountingPeriodsPreferences(value: String): HttpRequestBuilder =
     submitPage(
       value,
       s"$onshoreRoute/corporation-tax-accounting-periods"
     )
-  }
 
   val navigateToDirectorLoanLiabilities: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -187,12 +183,11 @@ object OnshoreDisclosureRequests extends Configuration {
       s"$onshoreRoute/director-loans-accounting-periods"
     )
 
-  def submitDLAccountingPeriodsPreferences(value: String): HttpRequestBuilder = {
+  def submitDLAccountingPeriodsPreferences(value: String): HttpRequestBuilder =
     submitPage(
       value,
       s"$onshoreRoute/director-loans-accounting-periods"
     )
-  }
 
   val navigateToOnshoreYears: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -200,14 +195,13 @@ object OnshoreDisclosureRequests extends Configuration {
       s"$onshoreRoute/onshore-years"
     )
 
-  val submitOnshoreYearsSelection: HttpRequestBuilder = {
+  val submitOnshoreYearsSelection: HttpRequestBuilder =
     submitPageWithFormParams(
       "Submit",
       s"$onshoreRoute/onshore-years",
       "value[3]",
       "2018"
     )
-  }
 
   val navigateToOnshoreLiabilities: HttpRequestBuilder =
     navigateToPageWithoutCsrf(

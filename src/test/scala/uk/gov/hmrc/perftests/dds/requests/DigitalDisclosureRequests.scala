@@ -26,7 +26,7 @@ object DigitalDisclosureRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
   val notificationRoute      = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute      = s"$digitalDisclosureRoute/onshore"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
 
   val navigateToStart: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -142,12 +142,11 @@ object DigitalDisclosureRequests extends Configuration {
       s"$notificationRoute/company-registration"
     )
 
-  val navigateToCompanyAddressLookup: HttpRequestBuilder = {
+  val navigateToCompanyAddressLookup: HttpRequestBuilder =
     navigateToAddressLookup(
       "/company-address/lookup",
       s"$notificationRoute/company-address/lookup"
     )
-  }
 
   val navigateToYourFullName: HttpRequestBuilder =
     navigateToPage(
@@ -185,7 +184,6 @@ object DigitalDisclosureRequests extends Configuration {
       .formParam("value[0]", _ => "email")
       .formParam("value[1]", _ => "telephone")
       .formParam("csrfToken", _("csrfToken").as[String])
-     
       .check(status.is(303))
 
   val navigateToYourEmailAddress: HttpRequestBuilder =
@@ -212,19 +210,17 @@ object DigitalDisclosureRequests extends Configuration {
       s"$notificationRoute/check-your-answers"
     )
 
-  val submitCheckYourAnswers: HttpRequestBuilder = {
+  val submitCheckYourAnswers: HttpRequestBuilder =
     submitPageWithoutValue(
       "/check-your-answers",
       s"$notificationRoute/check-your-answers"
     )
-  }
 
-  val navigateToSubmitted: HttpRequestBuilder = {
+  val navigateToSubmitted: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
       "/submitted",
       s"$notificationRoute/submitted"
     )
-  }
 
   val navigateToMakeADisclosure: HttpRequestBuilder =
     navigateToPageWithoutCsrf(
@@ -250,13 +246,10 @@ object DigitalDisclosureRequests extends Configuration {
       s"$digitalDisclosureRoute/declaration"
     )
 
-
-  val submitDeclarationConfirmation: HttpRequestBuilder = {
+  val submitDeclarationConfirmation: HttpRequestBuilder =
     submitPageWithoutValue(
       "/confirm",
-        s"$digitalDisclosureRoute/declaration/confirm"
+      s"$digitalDisclosureRoute/declaration/confirm"
     )
-  }
-
 
 }
