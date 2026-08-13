@@ -67,4 +67,16 @@ object BaseRequests extends Configuration {
       .post(url)
       .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
+
+  def submitPageWithFormParams(
+                  pageName: String,
+                  url: String,
+                  formParamName: String,
+                  value: String
+                ): HttpRequestBuilder =
+    http(s"Submit '$pageName'")
+      .post(url)
+      .formParam(formParamName, _ => value)
+      .formParam("csrfToken", _("csrfToken").as[String])
+      .check(status.is(303))
 }

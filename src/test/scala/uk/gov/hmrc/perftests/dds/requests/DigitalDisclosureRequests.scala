@@ -151,7 +151,7 @@ object DigitalDisclosureRequests extends Configuration {
 
   val navigateToYourFullName: HttpRequestBuilder =
     navigateToPage(
-      "your-full-name",
+      "/your-full-name",
       s"$notificationRoute/your-full-name"
     )
 

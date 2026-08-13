@@ -20,6 +20,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
+import uk.gov.hmrc.perftests.dds.requests.BaseRequests._
 
 object AddressLookupRequests extends Configuration {
 
@@ -30,11 +31,12 @@ object AddressLookupRequests extends Configuration {
       .get(addressLookupRoute + "/#{addressLookupJourneyId}/begin")
       .check(status.is(303))
 
-  val navigateToCountryPicker: HttpRequestBuilder =
-    http("Navigate to /country-picker")
-      .get(addressLookupRoute + "/#{addressLookupJourneyId}/country-picker")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+  val navigateToCountryPicker: HttpRequestBuilder = {
+    navigateToPage(
+      "/country-picker",
+      addressLookupRoute + "/#{addressLookupJourneyId}/country-picker"
+    )
+  }
 
   def submitCountryPicker(country: String, countryCode: String): HttpRequestBuilder =
     http(s"Submit '$country ($countryCode)'")
@@ -45,17 +47,19 @@ object AddressLookupRequests extends Configuration {
       .formParam("csrfToken", _("csrfToken").as[String])
       .check(status.is(303))
 
-  val navigateToLookup: HttpRequestBuilder =
-    http("Navigate to /lookup")
-      .get(addressLookupRoute + "/#{addressLookupJourneyId}/lookup")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+  val navigateToLookup: HttpRequestBuilder = {
+    navigateToPage(
+      "/lookup",
+      addressLookupRoute + "/#{addressLookupJourneyId}/lookup"
+    )
+  }
 
-  val navigateToEdit: HttpRequestBuilder =
-    http("Navigate to /edit")
-      .get(addressLookupRoute + "/#{addressLookupJourneyId}/edit")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+  val navigateToEdit: HttpRequestBuilder = {
+    navigateToPage(
+      "/edit",
+      addressLookupRoute + "/#{addressLookupJourneyId}/edit"
+    )
+  }
 
   def submitEdit(
     addressLineOne: String,
@@ -77,17 +81,20 @@ object AddressLookupRequests extends Configuration {
       .formParam("csrfToken", _("csrfToken").as[String])
        .check(status.is(303))
 
-  val navigateToConfirm: HttpRequestBuilder =
-    http("Navigate to /confirm")
-      .get(addressLookupRoute + "/#{addressLookupJourneyId}/confirm")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+  val navigateToConfirm: HttpRequestBuilder = {
+    navigateToPage(
+      "/confirm",
+      addressLookupRoute + "/#{addressLookupJourneyId}/confirm"
+    )
+  }
 
-  def submitConfirm(): HttpRequestBuilder =
-    http(s"Submit confirm")
-      .post(addressLookupRoute + "/#{addressLookupJourneyId}/confirm")
-      .formParam("continue", _ => "")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+  def submitConfirm(): HttpRequestBuilder = {
+    submitPageWithFormParams(
+      "/confirm",
+      addressLookupRoute + "/#{addressLookupJourneyId}/confirm",
+      "continue",
+      ""
+    )
+  }
 
 }
