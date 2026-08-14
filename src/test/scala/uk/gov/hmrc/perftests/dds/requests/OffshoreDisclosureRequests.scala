@@ -20,19 +20,20 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
+import uk.gov.hmrc.perftests.dds.requests.BaseRequests._
 
-object OffshoreDisclosureRequests extends Configuration{
+object OffshoreDisclosureRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
-  val notificationRoute = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute = s"$digitalDisclosureRoute/onshore"
-  val offshoreRoute = s"$digitalDisclosureRoute/offshore"
-
+  val notificationRoute      = s"$digitalDisclosureRoute/notification"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
+  val offshoreRoute          = s"$digitalDisclosureRoute/offshore"
 
   val navigateToReasonForDisclosureOffshore: HttpRequestBuilder =
-    http("Navigate to /reason-for-disclosure")
-      .get(s"$offshoreRoute/reason-for-disclosure")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/reason-for-disclosure",
+      s"$offshoreRoute/reason-for-disclosure"
+    )
 
   def submitReasonForDisclosurePreferencesOffshore: HttpRequestBuilder =
     http(s"Submit reason for disclosure preferences")
@@ -44,93 +45,104 @@ object OffshoreDisclosureRequests extends Configuration{
       .check(status.is(303))
 
   val navigateWhyNotNotifyOffshore: HttpRequestBuilder =
-    http("Navigate to /reason-for-not-notify-tax-liability")
-      .get(s"$offshoreRoute/reason-for-not-notify-tax-liability")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/reason-for-not-notify-tax-liability",
+      s"$offshoreRoute/reason-for-not-notify-tax-liability"
+    )
 
   def submitWhyNotNotifyOffshore: HttpRequestBuilder =
-    http(s"Submit reason for not notifying")
-      .post(s"$offshoreRoute/reason-for-not-notify-tax-liability")
-      .formParam("value[2]", _ => "deliberatelyDidNotNotify")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "reason for not notifying",
+      s"$offshoreRoute/reason-for-not-notify-tax-liability",
+      "value[2]",
+      "deliberatelyDidNotNotify"
+    )
 
   val navigateWhyNotFileOnTimeOffshore: HttpRequestBuilder =
-    http("Navigate to /reason-for-return-not-filed-on-time")
-      .get(s"$offshoreRoute/reason-for-return-not-filed-on-time")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/reason-for-return-not-filed-on-time",
+      s"$offshoreRoute/reason-for-return-not-filed-on-time"
+    )
 
   def submitWhyNotFileOnTimeOffshore: HttpRequestBuilder =
-    http(s"Submit reason for not filing on time")
-      .post(s"$offshoreRoute/reason-for-return-not-filed-on-time")
-      .formParam("value[2]", _ => "deliberatelyWithheldInformation")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "reason for not filing on time",
+      s"$offshoreRoute/reason-for-return-not-filed-on-time",
+      "value[2]",
+      "deliberatelyWithheldInformation"
+    )
 
   val navigateWhySubmittedInaccurateReturnOffshore: HttpRequestBuilder =
-    http("Navigate to /reason-for-inaccurate-return")
-      .get(s"$offshoreRoute/reason-for-inaccurate-return")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/reason-for-inaccurate-return",
+      s"$offshoreRoute/reason-for-inaccurate-return"
+    )
 
   def submitWhySubmittedInaccurateReturnOffshore: HttpRequestBuilder =
-    http(s"Submit reason inaccurate return")
-      .post(s"$offshoreRoute/reason-for-inaccurate-return")
-      .formParam("value[2]", _ => "deliberatelyInaccurate")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "reason inaccurate return",
+      s"$offshoreRoute/reason-for-inaccurate-return",
+      "value[2]",
+      "deliberatelyInaccurate"
+    )
 
   val navigateToCDFOffshore: HttpRequestBuilder =
-    http("Navigate to /contractual-disclosure-facility")
-      .get(s"$offshoreRoute/contractual-disclosure-facility")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/contractual-disclosure-facility",
+      s"$offshoreRoute/contractual-disclosure-facility"
+    )
 
   def submitCDFPreferencesOffshore(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$offshoreRoute/contractual-disclosure-facility")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$offshoreRoute/contractual-disclosure-facility"
+    )
 
   val navigateToOffshoreYears: HttpRequestBuilder =
-    http("Navigate to /offshore-years")
-      .get(s"$offshoreRoute/offshore-years")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/offshore-years",
+      s"$offshoreRoute/offshore-years"
+    )
 
   val submitOffshoreYearsSelection: HttpRequestBuilder =
-    http(s"Submit")
-      .post(s"$offshoreRoute/offshore-years")
-      .formParam("value[3]", _ => "2018")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "submit",
+      s"$offshoreRoute/offshore-years",
+      "value[3]",
+      "2018"
+    )
 
   val navigateToOffshoreLiabilitiesCountry: HttpRequestBuilder =
-    http("Navigate to /offshore-liabilities-country")
-      .get(s"$offshoreRoute/offshore-liabilities-country")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/offshore-liabilities-country",
+      s"$offshoreRoute/offshore-liabilities-country"
+    )
 
   def submitOffshoreLiabilitiesCountryPreferences(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$offshoreRoute/offshore-liabilities-country")
-      .formParam("country", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      s"Submit '$value'",
+      s"$offshoreRoute/offshore-liabilities-country",
+      "country",
+      value
+    )
 
   val navigateToCountriesOrTerritories: HttpRequestBuilder =
-    http("Navigate to /countries-or-territories")
-      .get(s"$offshoreRoute/countries-or-territories")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/countries-or-territories",
+      s"$offshoreRoute/countries-or-territories"
+    )
 
   def submitCountriesOrTerritoriesPreferences(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$offshoreRoute/countries-or-territories")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$offshoreRoute/countries-or-territories"
+    )
 
   val navigateToOffshoreLiabilities: HttpRequestBuilder =
-    http("Navigate to /offshore-liabilities/0")
-      .get(s"$offshoreRoute/offshore-liabilities/0")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/offshore-liabilities/0",
+      s"$offshoreRoute/offshore-liabilities/0"
+    )
 
   val submitOffshoreLiabilities: HttpRequestBuilder =
     http(s"Submit")
@@ -148,45 +160,47 @@ object OffshoreDisclosureRequests extends Configuration{
       .check(status.is(303))
 
   val navigateToLegalInterpretation: HttpRequestBuilder =
-    http("Navigate to /offshore-liabilities-interpretation")
-      .get(s"$offshoreRoute/offshore-liabilities-interpretation")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/offshore-liabilities-interpretation",
+      s"$offshoreRoute/offshore-liabilities-interpretation"
+    )
 
   val submitLegalInterpretation: HttpRequestBuilder =
-    http(s"Submit")
-      .post(s"$offshoreRoute/offshore-liabilities-interpretation")
-      .formParam("value[6]", _ => "inheritanceTaxIssues")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "submit",
+      s"$offshoreRoute/offshore-liabilities-interpretation",
+      "value[6]",
+      "inheritanceTaxIssues"
+    )
 
   val navigateToOffshoreLiabilitiesTaxNotIncluded: HttpRequestBuilder =
-    http("Navigate to /offshore-liabilities-tax-not-included")
-      .get(s"$offshoreRoute/offshore-liabilities-tax-not-included")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/offshore-liabilities-tax-not-included",
+      s"$offshoreRoute/offshore-liabilities-tax-not-included"
+    )
 
   val submitOffshoreLiabilitiesTaxNotIncluded: HttpRequestBuilder =
-    http(s"Submit")
-      .post(s"$offshoreRoute/offshore-liabilities-tax-not-included")
-      .formParam("value", _ => "moreThanTenThousandLessThanOneLakh")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      "moreThanTenThousandLessThanOneLakh",
+      s"$offshoreRoute/offshore-liabilities-tax-not-included"
+    )
 
   val navigateToOffshoreMaxValueAssets: HttpRequestBuilder =
-    http("Navigate to /offshore-liabilities-maximum-value-of-assets")
-      .get(s"$offshoreRoute/offshore-liabilities-maximum-value-of-assets")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/offshore-liabilities-maximum-value-of-assets",
+      s"$offshoreRoute/offshore-liabilities-maximum-value-of-assets"
+    )
 
   val submitOffshoreMaxValueAssets: HttpRequestBuilder =
-    http(s"Submit")
-      .post(s"$offshoreRoute/offshore-liabilities-maximum-value-of-assets")
-      .formParam("value", _ => "over1B")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      "over1B",
+      s"$offshoreRoute/offshore-liabilities-maximum-value-of-assets"
+    )
 
   val navigateToOffshoreLiabilitiesSummary: HttpRequestBuilder =
-    http("Navigate to /offshore-liabilities-summary")
-      .get(s"$offshoreRoute/offshore-liabilities-summary")
-      .check(status.is(200))
-
+    navigateToPageWithoutCsrf(
+      "/offshore-liabilities-summary",
+      s"$offshoreRoute/offshore-liabilities-summary"
+    )
 
 }

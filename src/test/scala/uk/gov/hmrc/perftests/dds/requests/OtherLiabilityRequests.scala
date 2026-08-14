@@ -16,46 +16,50 @@
 
 package uk.gov.hmrc.perftests.dds.requests
 
-import io.gatling.core.Predef._
-import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
+import uk.gov.hmrc.perftests.dds.requests.BaseRequests.*
 
-object OtherLiabilityRequests extends Configuration{
+object OtherLiabilityRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
-  val notificationRoute = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute = s"$digitalDisclosureRoute/onshore"
-  val offshoreRoute = s"$digitalDisclosureRoute/offshore"
-  val otherLiabilityRoute = s"$digitalDisclosureRoute/other-liabilities"
+  val notificationRoute      = s"$digitalDisclosureRoute/notification"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
+  val offshoreRoute          = s"$digitalDisclosureRoute/offshore"
+  val otherLiabilityRoute    = s"$digitalDisclosureRoute/other-liabilities"
 
   val navigateToOtherLiabilityIssues: HttpRequestBuilder =
-    http("Navigate to /other-liability-issues")
-      .get(s"$otherLiabilityRoute/other-liability-issues")
-      .check(status.is(200))
+    navigateToPage(
+      "/other-liability-issues",
+      s"$otherLiabilityRoute/other-liability-issues"
+    )
 
   def submitOtherLiabilityIssues: HttpRequestBuilder =
-    http(s"Submit other liability Issues")
-      .post(s"$otherLiabilityRoute/other-liability-issues")
-      .formParam("value[4]", _ => "other")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "other liability Issues",
+      s"$otherLiabilityRoute/other-liability-issues",
+      "value[4]",
+      "other"
+    )
 
   val navigateToOtherLiabilitiesToFix: HttpRequestBuilder =
-    http("Navigate to /other-liabilities-to-fix")
-      .get(s"$otherLiabilityRoute/other-liabilities-to-fix")
-      .check(status.is(200))
+    navigateToPage(
+      "/other-liabilities-to-fix",
+      s"$otherLiabilityRoute/other-liabilities-to-fix"
+    )
 
   def submitOtherLiabilitiesToFix: HttpRequestBuilder =
-    http(s"Submit Other Liabilities To Fix")
-      .post(s"$otherLiabilityRoute/other-liabilities-to-fix")
-      .formParam("value", _ => "Test")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "other Liabilities To Fix",
+      s"$otherLiabilityRoute/other-liabilities-to-fix",
+      "value",
+      "Test"
+    )
 
   val navigateToOtherLiabilitiesSummary: HttpRequestBuilder =
-    http("Navigate to /review-other-liability-issues")
-      .get(s"$otherLiabilityRoute/review-other-liability-issues")
-      .check(status.is(200))
+    navigateToPage(
+      "/review-other-liability-issues",
+      s"$otherLiabilityRoute/review-other-liability-issues"
+    )
 
 }

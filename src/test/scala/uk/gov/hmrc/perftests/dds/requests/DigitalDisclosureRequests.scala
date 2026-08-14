@@ -20,179 +20,163 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
+import uk.gov.hmrc.perftests.dds.requests.BaseRequests._
 
 object DigitalDisclosureRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
   val notificationRoute      = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute      = s"$digitalDisclosureRoute/onshore"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
 
   val navigateToStart: HttpRequestBuilder =
-    http("Navigate to /tell-hmrc-about-underpaid-tax-from-previous-years")
-      .get(s"$digitalDisclosureRoute")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/tell-hmrc-about-underpaid-tax-from-previous-years",
+      s"$digitalDisclosureRoute"
+    )
 
   val navigateToUsingThisService: HttpRequestBuilder =
-    http("Navigate to /using-this-service")
-      .get(s"$digitalDisclosureRoute/using-this-service")
-      .check(status.is(200))
-      .check(saveCsrfToken)    
+    navigateToPage(
+      "/using-this-service",
+      s"$digitalDisclosureRoute/using-this-service"
+    )
 
   def submitUsingThisService(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$digitalDisclosureRoute/using-this-service")
-      .formParam("value", _ => value)
-      
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))     
+    submitPage(
+      value,
+      s"$digitalDisclosureRoute/using-this-service"
+    )
 
   val navigateToLetterFromHmrc: HttpRequestBuilder =
-    http("Navigate to /letter-from-hmrc")
-      .get(s"$notificationRoute/letter-from-hmrc")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/letter-from-hmrc",
+      s"$notificationRoute/letter-from-hmrc"
+    )
 
   def submitLetterFromHmrc(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/letter-from-hmrc")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/letter-from-hmrc"
+    )
 
   val navigateToHmrcLetterReference: HttpRequestBuilder =
-    http("Navigate to /hmrc-letter-reference")
-      .get(s"$notificationRoute/hmrc-letter-reference")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/hmrc-letter-reference",
+      s"$notificationRoute/hmrc-letter-reference"
+    )
 
   def submitHmrcLetterReference(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/hmrc-letter-reference")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/hmrc-letter-reference"
+    )
 
   val navigateToWhatIsThisDisclosureAbout: HttpRequestBuilder =
-    http("Navigate to /what-is-this-disclosure-about")
-      .get(s"$notificationRoute/what-is-this-disclosure-about")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/what-is-this-disclosure-aboute",
+      s"$notificationRoute/what-is-this-disclosure-about"
+    )
 
   def submitWhatIsThisDisclosureAbout(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/what-is-this-disclosure-about")
-      .formParam("value", _ => value)
-     
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/what-is-this-disclosure-about"
+    )
 
   val navigateToAreYouAnOfficer: HttpRequestBuilder =
-    http("Navigate to /are-you-the-entity")
-      .get(s"$notificationRoute/are-you-the-entity")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/are-you-the-entity",
+      s"$notificationRoute/are-you-the-entity"
+    )
 
   def submitAreYouAnOfficer(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/are-you-the-entity")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/are-you-the-entity"
+    )
 
   val navigateToDiscloseOffshoreLiabilities: HttpRequestBuilder =
-    http("Navigate to /disclose-offshore-liabilities")
-      .get(s"$notificationRoute/disclose-offshore-liabilities")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/disclose-offshore-liabilities",
+      s"$notificationRoute/disclose-offshore-liabilities"
+    )
 
   def submitDiscloseOffshoreLiabilities(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/disclose-offshore-liabilities")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/disclose-offshore-liabilities"
+    )
 
   def submitDiscloseOnshoreLiabilities(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/disclose-onshore-liabilities")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/disclose-onshore-liabilities"
+    )
 
   val navigateToDiscloseOnshoreLiabilitiesOnly: HttpRequestBuilder =
-    http("Navigate to /disclose-onshore-liabilities-only")
-      .get(s"$notificationRoute/disclose-onshore-liabilities-only")
-      .check(status.is(200))
+    navigateToPage(
+      "/disclose-onshore-liabilities-only",
+      s"$notificationRoute/disclose-onshore-liabilities-only"
+    )
 
   val navigateToCompanyName: HttpRequestBuilder =
-    http("Navigate to /company-name")
-      .get(s"$notificationRoute/company-name")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/company-name",
+      s"$notificationRoute/company-name"
+    )
 
   def submitCompanyName(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/company-name")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/company-name"
+    )
 
   val navigateToCompanyRegistration: HttpRequestBuilder =
-    http("Navigate to /company-registration")
-      .get(s"$notificationRoute/company-registration")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/company-registration",
+      s"$notificationRoute/company-registration"
+    )
 
   def submitCompanyRegistration(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/company-registration")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/company-registration"
+    )
 
   val navigateToCompanyAddressLookup: HttpRequestBuilder =
-    http("Navigate to /company-address/lookup")
-      .get(s"$notificationRoute/company-address/lookup")
-      .check(status.is(303))
-      .check(saveAddressLookupJourneyId)
+    navigateToAddressLookup(
+      "/company-address/lookup",
+      s"$notificationRoute/company-address/lookup"
+    )
 
   val navigateToYourFullName: HttpRequestBuilder =
-    http("Navigate to /your-full-name")
-      .get(s"$notificationRoute/your-full-name")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/your-full-name",
+      s"$notificationRoute/your-full-name"
+    )
 
   def submitYourFullName(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/your-full-name")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/your-full-name"
+    )
 
   val navigateToYourTelephoneNumber: HttpRequestBuilder =
-    http("Navigate to /your-telephone-number")
-      .get(s"$notificationRoute/your-telephone-number")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/your-telephone-number",
+      s"$notificationRoute/your-telephone-number"
+    )
 
   def submitYourTelephoneNumber(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/your-telephone-number")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/your-telephone-number"
+    )
 
   val navigateToContactPreferences: HttpRequestBuilder =
-    http("Navigate to /contact-preference")
-      .get(s"$notificationRoute/contact-preference")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/contact-preference",
+      s"$notificationRoute/contact-preference"
+    )
 
   def submitContactPreferences: HttpRequestBuilder =
     http(s"Submit contact preferences")
@@ -200,73 +184,72 @@ object DigitalDisclosureRequests extends Configuration {
       .formParam("value[0]", _ => "email")
       .formParam("value[1]", _ => "telephone")
       .formParam("csrfToken", _("csrfToken").as[String])
-     
       .check(status.is(303))
 
   val navigateToYourEmailAddress: HttpRequestBuilder =
-    http("Navigate to /your-email-address")
-      .get(s"$notificationRoute/your-email-address")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/your-email-address",
+      s"$notificationRoute/your-email-address"
+    )
 
   def submitYourEmailAddress(value: String): HttpRequestBuilder =
-    http(s"Submit '$value'")
-      .post(s"$notificationRoute/your-email-address")
-      .formParam("value", _ => value)
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPage(
+      value,
+      s"$notificationRoute/your-email-address"
+    )
 
   val navigateToYourAddressLookup: HttpRequestBuilder =
-    http("Navigate to /your-address/lookup")
-      .get(s"$notificationRoute/your-address/lookup")
-      .check(status.is(303))
-      .check(saveAddressLookupJourneyId)
+    navigateToAddressLookup(
+      "/your-address/lookup",
+      s"$notificationRoute/your-address/lookup"
+    )
 
   val navigateToCheckYourAnswers: HttpRequestBuilder =
-    http("Navigate to /check-your-answers")
-      .get(s"$notificationRoute/check-your-answers")
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/check-your-answers",
+      s"$notificationRoute/check-your-answers"
+    )
 
   val submitCheckYourAnswers: HttpRequestBuilder =
-    http(s"Submit answers")
-      .post(s"$notificationRoute/check-your-answers")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithoutValue(
+      "/check-your-answers",
+      s"$notificationRoute/check-your-answers"
+    )
 
   val navigateToSubmitted: HttpRequestBuilder =
-    http(s"Navigate to /submitted")
-      .get(s"$notificationRoute/submitted")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/submitted",
+      s"$notificationRoute/submitted"
+    )
 
   val navigateToMakeADisclosure: HttpRequestBuilder =
-    http("Navigate to /make-a-disclosure")
-      .get(s"$digitalDisclosureRoute/make-a-disclosure")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/make-a-disclosure",
+      s"$digitalDisclosureRoute/make-a-disclosure"
+    )
 
   val submitMakeADisclosure: HttpRequestBuilder =
-    http(s"make-a-disclosure")
-      .post(s"$digitalDisclosureRoute/make-a-disclosure")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithoutValue(
+      "/make-a-disclosure",
+      s"$digitalDisclosureRoute/make-a-disclosure"
+    )
 
   val navigateToTaskList: HttpRequestBuilder =
-    http("Navigate to /disclosure-list-of-tasks")
-      .get(s"$digitalDisclosureRoute/disclosure-list-of-tasks")
-      .check(status.is(200))
+    navigateToPageWithoutCsrf(
+      "/disclosure-list-of-tasks",
+      s"$digitalDisclosureRoute/disclosure-list-of-tasks"
+    )
 
   val navigateToDeclaration: HttpRequestBuilder =
-    http("Navigate to /declaration")
-      .get(s"$digitalDisclosureRoute/declaration")
-      .check(status.is(200))
-
+    navigateToPageWithoutCsrf(
+      "/declaration",
+      s"$digitalDisclosureRoute/declaration"
+    )
 
   val submitDeclarationConfirmation: HttpRequestBuilder =
-    http(s"confirm")
-      .get(s"$digitalDisclosureRoute/declaration/confirm")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
-
-
+    submitPageWithoutValue(
+      "/confirm",
+      s"$digitalDisclosureRoute/declaration/confirm"
+    )
 
 }

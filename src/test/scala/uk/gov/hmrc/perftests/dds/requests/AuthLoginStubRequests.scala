@@ -20,6 +20,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
+import uk.gov.hmrc.perftests.dds.requests.BaseRequests._
 
 object AuthLoginStubRequests extends Configuration {
 
@@ -27,10 +28,10 @@ object AuthLoginStubRequests extends Configuration {
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
 
   val navigateToSignIn: HttpRequestBuilder =
-    http("Navigate to /auth-login-stub/gg-sign-in")
-      .get(signInRoute)
-      .check(status.is(200))
-      .check(saveCsrfToken)
+    navigateToPage(
+      "/auth-login-stub/gg-sign-in",
+      signInRoute
+    )
 
   def signIn(nino: String): HttpRequestBuilder =
     http("Log in")

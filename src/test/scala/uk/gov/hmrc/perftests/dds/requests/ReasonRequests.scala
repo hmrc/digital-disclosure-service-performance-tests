@@ -20,82 +20,92 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.perftests.dds.Configuration
+import uk.gov.hmrc.perftests.dds.requests.BaseRequests.*
 
-object ReasonRequests extends Configuration{
+object ReasonRequests extends Configuration {
 
   val digitalDisclosureRoute = s"$digitalDisclosureUrl/tell-hmrc-about-underpaid-tax-from-previous-years"
-  val notificationRoute = s"$digitalDisclosureRoute/notification"
-  val onshoreRoute = s"$digitalDisclosureRoute/onshore"
-  val offshoreRoute = s"$digitalDisclosureRoute/offshore"
-  val otherLiabilityRoute = s"$digitalDisclosureRoute/other-liabilities"
-  val reasonRoute = s"$digitalDisclosureRoute/reason"
+  val notificationRoute      = s"$digitalDisclosureRoute/notification"
+  val onshoreRoute           = s"$digitalDisclosureRoute/onshore"
+  val offshoreRoute          = s"$digitalDisclosureRoute/offshore"
+  val otherLiabilityRoute    = s"$digitalDisclosureRoute/other-liabilities"
+  val reasonRoute            = s"$digitalDisclosureRoute/reason"
 
   val navigateToWhyDisclosureNow: HttpRequestBuilder =
-    http("Navigate to /why-disclosure-now")
-      .get(s"$reasonRoute/why-disclosure-now")
-      .check(status.is(200))
+    navigateToPage(
+      "/why-disclosure-now",
+      s"$reasonRoute/why-disclosure-now"
+    )
 
   def submitWhyDisclosureNowPreferences: HttpRequestBuilder =
-    http(s"Submit reason for why-disclosure-now")
-      .post(s"$reasonRoute/why-disclosure-now")
-      .formParam("value[7]", _ => "other")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "reason for why-disclosure-now",
+      s"$reasonRoute/why-disclosure-now",
+      "value[7]",
+      "other"
+    )
 
   val navigateToReasonForDisclosureNow: HttpRequestBuilder =
-    http("Navigate to /reason-for-disclosure-now")
-      .get(s"$reasonRoute/reason-for-disclosure-now")
-      .check(status.is(200))
+    navigateToPage(
+      "/reason-for-disclosure-now",
+      s"$reasonRoute/reason-for-disclosure-now"
+    )
 
   def submitReasonForDisclosureNow: HttpRequestBuilder =
-    http(s"Submit reason for reason-for-disclosure-now")
-      .post(s"$reasonRoute/reason-for-disclosure-now")
-      .formParam("value", _ => "Test")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "reason for reason-for-disclosure-now",
+      s"$reasonRoute/reason-for-disclosure-now",
+      "value",
+      "Test"
+    )
 
   val navigateToWhyDisclosureNotMadeBefore: HttpRequestBuilder =
-    http("Navigate to /why-disclosure-not-made-before")
-      .get(s"$reasonRoute/why-disclosure-not-made-before")
-      .check(status.is(200))
+    navigateToPage(
+      "/why-disclosure-not-made-before",
+      s"$reasonRoute/why-disclosure-not-made-before"
+    )
 
   def submitReasonForWhyDisclosureNotMadeBefore: HttpRequestBuilder =
-    http(s"Submit reason for why-disclosure-not-made-before")
-      .post(s"$reasonRoute/why-disclosure-not-made-before")
-      .formParam("value", _ => "Test")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "reason for why-disclosure-not-made-before",
+      s"$reasonRoute/why-disclosure-not-made-before",
+      "value",
+      "Test"
+    )
 
   val navigateToSomeoneGaveAdvice: HttpRequestBuilder =
-    http("Navigate to /someone-gave-advice")
-      .get(s"$reasonRoute/someone-gave-advice")
-      .check(status.is(200))
-
+    navigateToPage(
+      "/someone-gave-advice",
+      s"$reasonRoute/someone-gave-advice"
+    )
 
   def submitSomeoneGaveAdvicePreferences: HttpRequestBuilder =
-    http(s"Submit Preferences for someone-gave-advice")
-      .post(s"$reasonRoute/someone-gave-advice")
-      .formParam("value", _ => "false")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
+    submitPageWithFormParams(
+      "Preferences for someone-gave-advice",
+      s"$reasonRoute/someone-gave-advice",
+      "value",
+      "false"
+    )
 
   val navigateToMakingDisclosureNowSummary: HttpRequestBuilder =
-    http("Navigate to /making-disclosure-now")
-      .get(s"$reasonRoute/making-disclosure-now")
-      .check(status.is(200))
+    navigateToPage(
+      "/making-disclosure-now",
+      s"$reasonRoute/making-disclosure-now"
+    )
 
   val navigateToYourOffer: HttpRequestBuilder =
-    http("Navigate to /your-offer")
-      .get(s"$digitalDisclosureRoute/your-offer")
-      .check(status.is(200))
+    navigateToPage(
+      "/your-offer",
+      s"$digitalDisclosureRoute/your-offer"
+    )
 
   def submitYourOffer: HttpRequestBuilder =
-    http(s"Submit Your Offer")
-      .post(s"$digitalDisclosureRoute/your-offer")
-      .formParam("value", _ => "2")
-      .formParam("csrfToken", _("csrfToken").as[String])
-      .check(status.is(303))
-
+    submitPageWithFormParams(
+      "Your offer",
+      s"$digitalDisclosureRoute/your-offer",
+      "value",
+      "2"
+    )
 
   def navigateToDisclosureSubmitted(reference: String): HttpRequestBuilder =
     http(s"Navigate to /disclosure-submitted/$reference")

@@ -106,7 +106,7 @@ class Simulation extends PerformanceTestRunner {
   ).withRequests(
     navigateToCheckYourAnswers,
     submitCheckYourAnswers,
-    navigateToSubmitted,
+    navigateToSubmitted
   )
 
   setup(
@@ -124,7 +124,7 @@ class Simulation extends PerformanceTestRunner {
     "Make a Declaration"
   ).withRequests(
     navigateToDeclaration,
-    //submitDeclarationConfirmation,
+    // submitDeclarationConfirmation,
     navigateToTaskList
   )
 
@@ -137,10 +137,10 @@ class Simulation extends PerformanceTestRunner {
     submitWhyNotNotify,
     submitWhyNotFileOnTime,
     submitWhySubmittedInaccurateReturn,
-    navigateToCDF ,
-    submitCDFPreferences("true") ,
+    navigateToCDF,
+    submitCDFPreferences("true"),
     navigateToWhatDoYouNeedToDisclose,
-    submitDisclosurePreferences,
+    submitDisclosurePreferences
   )
 
   setup(
@@ -181,7 +181,7 @@ class Simulation extends PerformanceTestRunner {
     submitWhyNotFileOnTimeOffshore,
     submitWhySubmittedInaccurateReturnOffshore,
     navigateToCDFOffshore,
-    submitCDFPreferencesOffshore("true"),
+    submitCDFPreferencesOffshore("true")
   )
 
   setup(
@@ -242,7 +242,6 @@ class Simulation extends PerformanceTestRunner {
     submitYourOffer,
     navigateToDisclosureSubmitted("CFSS-1234567")
   )
-
 
   runSimulation()
 
